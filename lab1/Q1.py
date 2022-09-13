@@ -42,14 +42,14 @@ def main(func, ver):
     plt.plot(time, vy, label='$v_y$')
     plt.legend()
     plt.xlabel('Time $t$ (yr)')
-    plt.ylabel('Velocity (m/s)')
+    plt.ylabel('Velocity AU/yr)')
     plt.title('Velocity vs Time ({})'.format(ver))
     plt.show()
 
     #Plot angular momentum magnitude
     plt.plot(time, L)
     plt.xlabel('Time $t$ (yr)')
-    plt.ylabel('Angular Momentum $||\\overrightarrow{{L}}||$ ()')
+    plt.ylabel('Angular Momentum $||\\overrightarrow{{L}}||$ (AU$^2$/yr)')
     plt.title('Angular Momentum vs time ({})'.format(ver))
     plt.show()
 
