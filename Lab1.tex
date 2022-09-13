@@ -1,0 +1,63 @@
+\documentclass[11pt]{article}
+%============= Imports =============
+\usepackage{physics}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[dvips,letterpaper,margin=1.1in,bottom=0.7in]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{charter}
+\usepackage{tabstackengine}
+\usepackage{fancyhdr}
+%============= Page style =============
+\pagestyle{fancy}
+\newcommand{\CourseDef}{PHY407} %Course
+\newcommand{\TitleDef}{Lab 1} %Title
+\newcommand{\NumberDef}{1006154625}
+\newcommand{\AuthorDef}{Sam De Abreu \& Lucas Parates} %Author (Name)
+\rhead{\AuthorDef}
+\chead{\TitleDef}
+\lhead{\CourseDef}
+%============= Matrix Commands =============
+\setstackEOL{;}% row separator
+\setstackTAB{,}% column separator
+\setstacktabbedgap{2ex}% inter-column gap
+\setstackgap{L}{1.0\normalbaselineskip}% inter-row baselineskip
+\let\bmatrix\bracketMatrixstack
+\let\pmatrix\parenMatrixstack
+\let\dmatrix\vertMatrixstack
+\newcommand{\declarecommand}[1]{\providecommand{#1}{}\renewcommand{#1}}
+%============= Other Commands =============
+\declarecommand{\R}{\mathbb{R}}
+\declarecommand{\Q}{\mathbb{Q}}
+\declarecommand{\Z}{\mathbb{Z}}
+\declarecommand{\N}{\mathbb{N}}
+\declarecommand{\C}{\mathbb{C}}
+\declarecommand{\emptyset}{\varnothing}
+\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+%%[label=(alph*)]
+%============= Title Config =============
+%\title{\CourseDef\space\TitleDef}
+%\author{\AuthorDef \\ \NumberDef}
+\begin{document}
+\thispagestyle{plain}
+{\noindent\Huge\bf  \\[0.5\baselineskip] {\fontfamily{cmr}\selectfont  \TitleDef}         }\\[2\baselineskip] % Title
+{ {\bf \fontfamily{cmr}\selectfont \CourseDef}\\ {\textit{\fontfamily{cmr}\selectfont     \today}}}\hspace{150pt}    {\large \textsc{\AuthorDef}} % Author name
+\\[1.4\baselineskip]
+\vspace{15pt}
+%============= Start File =============
+
+\section*{Work Breakdown}
+\begin{itemize}
+    \item \textbf{Sam} did x and y
+    \item \textbf{Lucas} did z and w
+\end{itemize}
+\noindent\rule{\textwidth}{1pt}
+
+\section*{Question 1}
+
+\section*{Question 2}
+
+\section*{Question 3}
+
+\end{document}
