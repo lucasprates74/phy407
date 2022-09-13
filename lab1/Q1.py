@@ -18,10 +18,10 @@ y[0] = y0
 vx[0] = vx0 
 vy[0] = vy0 
 
-#Loop for 10**3 steps and solve equations using Euler-Cromer method
+#Loop for 10**4 steps and solve equations using Euler-Cromer method
 for i in range(1, N):
-    vx[i] = vx[i-1] + myf.gravity(x[i-1], y[i-1])[0]*dt
-    vy[i] = vy[i-1] + myf.gravity(x[i-1], y[i-1])[1]*dt
+    vx[i] = vx[i-1] + myf.gravity_rel(x[i-1], y[i-1])[0]*dt
+    vy[i] = vy[i-1] + myf.gravity_rel(x[i-1], y[i-1])[1]*dt
     x[i] = x[i-1] + vx[i]*dt
     y[i] = y[i-1] + vy[i]*dt
 
@@ -33,6 +33,7 @@ time = np.array(range(N))*dt
 plt.plot(x, y)
 plt.xlabel('$x$ (AU)')
 plt.ylabel('$y$ (AU)')
+plt.title('Orbital Position')
 plt.show()
 
 #Plot velocity components
@@ -41,10 +42,11 @@ plt.plot(time, vy, label='$v_y$')
 plt.legend()
 plt.xlabel('Time $t$ (yr)')
 plt.ylabel('Velocity (m/s)')
+plt.title('Velocity vs Time')
 plt.show()
 
 #Plot angular momentum magnitude
 plt.plot(time, L)
 plt.xlabel('Time $t$ (yr)')
 plt.ylabel('Angular Momentum $||\\overrightarrow{{L}}||$ ()')
-plt.show()
+plt.show('Angular Momentum vs time')
