@@ -21,7 +21,7 @@ def main(mjup, x0, y0, vx0, vy0, timespan, ver):
     OUTPUT: Plots
     """
     # initialize time step and end variables 
-    dt = 10 ** -3 # yr
+    dt = 10 ** -4 # yr
     N = int(timespan/dt) # steps in 10 earth years
 
     # Initialize arrays for small body with initial conditions
