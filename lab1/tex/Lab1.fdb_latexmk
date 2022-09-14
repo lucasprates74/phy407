@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1663105438 "c:/Users/ziylo/Documents/GitHub/phy407-lab1/lab1/tex/Lab1.tex" "c:/Users/ziylo/Documents/GitHub/phy407-lab1/lab1/tex/Lab1.pdf" "Lab1" 1663105460
+["pdflatex"] 1663105438 "c:/Users/ziylo/Documents/GitHub/phy407-lab1/lab1/tex/Lab1.tex" "c:/Users/ziylo/Documents/GitHub/phy407-lab1/lab1/tex/Lab1.pdf" "Lab1" 1663160538
   "C:/Users/ziylo/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1600049805 10020124 ab621a7cced7fd79c3c99782cab1aff2 ""
   "C:/Users/ziylo/AppData/Local/MiKTeX/pdftex/config/pdftex.map" 1661698025 221584 c2bff92be6b65bebeb9051a7a9ad3961 ""
   "C:/Users/ziylo/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -109,15 +109,15 @@
   "C:/Users/ziylo/AppData/Local/Programs/MiKTeX/tex/latex/tabstackengine/tabstackengine.sty" 1520244904 20661 8dbdab94441dd850cf4b1e60d8f4d8e7 ""
   "C:/Users/ziylo/AppData/Local/Programs/MiKTeX/tex/latex/tools/calc.sty" 1580648486 10216 5efd55f2010055e7b7875afd6a75be82 ""
   "C:/Users/ziylo/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388494052 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "Lab1.aux" 1663105439 662 b2b94621371df8d9296b8bf5bec1b851 "pdflatex"
-  "Lab1.out" 1663105439 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "Lab1.tex" 1663105437 3075 c5ae275a6c4c1d61cccd5d48f979d37f ""
-  "c:/Users/ziylo/Documents/GitHub/phy407-lab1/lab1/tex/Lab1.aux" 1663105439 662 b2b94621371df8d9296b8bf5bec1b851 ""
-  "c:/Users/ziylo/Documents/GitHub/phy407-lab1/lab1/tex/Lab1.tex" 1663105437 3075 c5ae275a6c4c1d61cccd5d48f979d37f ""
+  "Lab1.aux" 1663160510 662 b2b94621371df8d9296b8bf5bec1b851 "pdflatex"
+  "Lab1.out" 1663160510 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "Lab1.tex" 1663160537 3075 c5ae275a6c4c1d61cccd5d48f979d37f ""
+  "c:/Users/ziylo/Documents/GitHub/phy407-lab1/lab1/tex/Lab1.aux" 1663160510 662 b2b94621371df8d9296b8bf5bec1b851 ""
+  "c:/Users/ziylo/Documents/GitHub/phy407-lab1/lab1/tex/Lab1.tex" 1663160537 3075 c5ae275a6c4c1d61cccd5d48f979d37f ""
   (generated)
-  "Lab1.log"
-  "Lab1.out"
   "c:/Users/ziylo/Documents/GitHub/phy407-lab1/lab1/tex/Lab1.pdf"
-  "Lab1.aux"
-  "c:/Users/ziylo/Documents/GitHub/phy407-lab1/lab1/tex/Lab1.log"
+  "Lab1.log"
   "Lab1.pdf"
+  "Lab1.aux"
+  "Lab1.out"
+  "c:/Users/ziylo/Documents/GitHub/phy407-lab1/lab1/tex/Lab1.log"
