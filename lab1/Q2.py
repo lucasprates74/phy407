@@ -11,6 +11,15 @@ xa0, ya0 = 3.3, 0  # AU
 vax0, vay0 = 0, 3.46  # AU / yr
 
 def main(mjup, x0, y0, vx0, vy0, timespan, ver):
+    """
+    Main algorithm for computing and plotting orbits
+    INPUT: 
+    mjup is the mass of jupiter
+    (x0, y0, vx0, vy0) are the initial conditions for the small body
+    timespan is the number of Earth years that are simulater
+    ver is a dictionary which specifies what the small body and the large body are
+    OUTPUT: Plots
+    """
     # initialize time step and end variables 
     dt = 10 ** -3 # yr
     N = int(timespan/dt) # steps in 10 earth years
@@ -67,14 +76,15 @@ def main(mjup, x0, y0, vx0, vy0, timespan, ver):
     plt.xlabel('$x$ (AU)')
     plt.ylabel('$y$ (AU)')
     plt.title('Orbital Position')
-    plt.show()
+    plt.savefig('lab1/img/Q2position_{0}_{1}'.format(ver['small'], ver['big']))
+    plt.clf()
 
 if __name__ == '__main__':
     # part a
     main(myf.MJUP, xe0, ye0, vex0, vey0, 10, {'small': 'Earth', 'big': 'Jupiter'})
 
     # part b
-    main(1000 * myf.MJUP, xe0, ye0, vex0, vey0, 3, {'small': 'Earth', 'big': 'Jupiter w/ 1000x mass'})
+    main(1000 * myf.MJUP, xe0, ye0, vex0, vey0, 3, {'small': 'Earth', 'big': '1000xJupiter'})
 
     # part c
     main(myf.MJUP, xa0, ya0, vax0, vay0, 20, {'small': 'Asteroid', 'big': 'Jupiter'})
