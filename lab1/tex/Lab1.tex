@@ -48,13 +48,29 @@
 %============= Start File =============
 
 \section*{Work Breakdown}
+We worked/talked on/about all parts, but some more than others:
 \begin{itemize}
-    \item \textbf{Sam} did x and y
-    \item \textbf{Lucas} did z and w
+    \item \textbf{Sam} worked on \texttt{Q1.py}
+    \item \textbf{Lucas} worked on \texttt{Q2.py}, \texttt{myFunctions.py}
 \end{itemize}
 \noindent\rule{\textwidth}{1pt}
 
 \section*{Question 1}
+\begin{enumerate}[label=(\alph*)]
+    \item Nothing to submit
+    \item Pseudocode: 
+    \texttt{\begin{itemize}
+        \item Initialize position arrays (x, y) and velocity arrays (vx, vy) along with the initial conditions
+        \item Loop for $10^4$ steps and integrate equations using the Euler-Cromer method
+        \item Plot the position of Earth in (x, y) space and velocity components (vx, vy) with respect to time  
+    \end{itemize}}
+    The equations used in the Euler-Cromer integration are as follows:
+    \[v_{x,i} = v_{x,i-1}-\frac{GM_Sx_{i-1}}{(x_{i-1}^2+y_{i-1}^2)^{3/2}}\Delta t\tag{1}\]
+    \[v_{y,i} = v_{y,i-1}-\frac{GM_Sy_{i-1}}{(x_{i-1}^2+y_{i-1}^2)^{3/2}}\Delta t\tag{2}\]
+    \[x_{i} = x_{i-1}-v_{x,i}\Delta t\tag{3}\]
+    \[y_{i} = y_{i-1}-v_{y,i}\Delta t\tag{4}\]
+    
+\end{enumerate}
 
 \section*{Question 2}
 
