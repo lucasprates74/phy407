@@ -44,7 +44,7 @@ def main(func, ver): #Main algorithm for computing and plotting orbits
     plt.xlabel('$x$ (AU)')
     plt.ylabel('$y$ (AU)')
     plt.title('Orbital Position ({})'.format(ver))
-    plt.savefig('position_{0}.png'.format(ver))
+    plt.savefig('img\position_{0}.png'.format(ver))
     plt.clf()
 
     #Plot velocity components
@@ -54,7 +54,7 @@ def main(func, ver): #Main algorithm for computing and plotting orbits
     plt.xlabel('Time $t$ (yr)')
     plt.ylabel('Velocity AU/yr)')
     plt.title('Velocity vs Time ({})'.format(ver))
-    plt.savefig('velocity_{0}.png'.format(ver))
+    plt.savefig('img\velocity_{0}.png'.format(ver))
     plt.clf()
 
     #Plot angular momentum magnitude
@@ -64,7 +64,7 @@ def main(func, ver): #Main algorithm for computing and plotting orbits
     plt.xlabel('Time $t$ (yr)')
     plt.ylabel('Angular Momentum per unit mass $||\\overrightarrow{{L}}||/M_M$ (AU$^2$/yr)')
     plt.title('Angular Momentum vs Time ({})'.format(ver))
-    plt.savefig('angularmomentum_{0}.png'.format(ver))
+    plt.savefig('img\angularmomentum_{0}.png'.format(ver))
     plt.clf()
 
 if __name__ == '__main__': 
