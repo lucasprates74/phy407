@@ -59,9 +59,12 @@ def main(mjup, x0, y0, vx0, vy0, timespan, ver):
         xj[i] = xj[i-1] + vjx[i]*dt
         yj[i] = yj[i-1] + vjy[i]*dt
 
-        # update conditions for the small body
+        
+
+        # get the net acceleration of the small body
         g = myf.gravity(x[i-1], y[i-1]) + mjup * myf.gravity(x[i-1] - xj[i-1], y[i-1] - yj[i-1])
 
+        # update conditions for the small body
         vx[i] = vx[i-1] + g[0]*dt
         vy[i] = vy[i-1] + g[1]*dt
         x[i] = x[i-1] + vx[i]*dt
