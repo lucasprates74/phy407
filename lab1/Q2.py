@@ -68,11 +68,11 @@ def main(mjup, x0, y0, vx0, vy0, timespan, ver):
         y[i] = y[i-1] + vy[i]*dt
 
     #Plot position of planet (x, y) space
+
+    plt.gcf().set_size_inches(6,6)
     plt.plot(x, y, label=ver['small'])
     plt.plot(xj, yj, label=ver['big'])
     plt.legend()
-    plt.xlim(-6, 6)
-    plt.ylim(-6, 6)
     plt.xlabel('$x$ (AU)')
     plt.ylabel('$y$ (AU)')
     plt.title('Orbital Position')

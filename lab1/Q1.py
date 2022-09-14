@@ -1,6 +1,6 @@
 """
 Q1 code. External function and variable calls to myFunction.py for gravity formulas and constants.
-Authors: Sam De Abreu 
+Authors: Sam De Abreu
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -14,7 +14,7 @@ N = int(1/dt) #steps
 def main(func, ver): #Main algorithm for computing and plotting orbits
     """
     Main algorithm for computing and plotting orbits
-    INPUT: func is the acceleration formula and ver is either Newtonian or Relativistic 
+    INPUT: func is the acceleration formula and ver is either Newtonian or Relativistic
     OUTPUT: Plots
     """
     #Initialize arrays with initial conditions
@@ -24,8 +24,8 @@ def main(func, ver): #Main algorithm for computing and plotting orbits
     vy = np.zeros(N)
     x[0] = x0
     y[0] = y0
-    vx[0] = vx0 
-    vy[0] = vy0 
+    vx[0] = vx0
+    vy[0] = vy0
     #Loop for 10**4 steps and solve equations using Euler-Cromer method
     for i in range(1, N):
         vx[i] = vx[i-1] + func(x[i-1], y[i-1])[0]*dt
@@ -34,13 +34,13 @@ def main(func, ver): #Main algorithm for computing and plotting orbits
         y[i] = y[i-1] + vy[i]*dt
 
     #Compute angular momentum
-    L = (x*vy - y*vx) 
+    L = (x*vy - y*vx)
 
     #Plot position of planet (x, y) space
     time = np.array(range(N))*dt
+
+    plt.gcf().set_size_inches(6,6)
     plt.plot(x, y)
-    plt.xlim(-0.5, 0.5)
-    plt.ylim(-0.5, 0.5)
     plt.xlabel('$x$ (AU)')
     plt.ylabel('$y$ (AU)')
     plt.title('Orbital Position ({})'.format(ver))
@@ -67,6 +67,6 @@ def main(func, ver): #Main algorithm for computing and plotting orbits
     plt.savefig('lab1/img/Q1angularmomentum_{0}.png'.format(ver))
     plt.clf()
 
-if __name__ == '__main__': 
+if __name__ == '__main__':
     main(myf.gravity, 'Newtonian') #Newtonian orbits, Q1c
     main(myf.gravity_rel, 'Relativistic') #Relativistic orbits, Q1d
