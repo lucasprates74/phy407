@@ -12,7 +12,8 @@ vax0, vay0 = 0, 3.46  # AU / yr
 
 def main(mjup, x0, y0, vx0, vy0, timespan, ver):
     """
-    Main algorithm for computing and plotting orbits
+    Main algorithm for computing and plotting orbits for a three body system with
+    a very small mass.
     INPUT: 
     mjup is the mass of jupiter
     (x0, y0, vx0, vy0) are the initial conditions for the small body
@@ -80,8 +81,9 @@ def main(mjup, x0, y0, vx0, vy0, timespan, ver):
     plt.xlabel('$x$ (AU)')
     plt.ylabel('$y$ (AU)')
     plt.title('Orbital Position')
-    plt.savefig('lab1/img/Q2position_{0}_{1}'.format(ver['small'], ver['big']))
-    plt.clf()
+    # plt.savefig('lab1/img/Q2position_{0}_{1}'.format(ver['small'], ver['big']))
+    # plt.clf()
+    plt.show()
 
 if __name__ == '__main__':
     # part a
