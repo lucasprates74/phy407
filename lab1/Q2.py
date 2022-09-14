@@ -59,9 +59,12 @@ def main(mjup, x0, y0, vx0, vy0, timespan, ver):
         xj[i] = xj[i-1] + vjx[i]*dt
         yj[i] = yj[i-1] + vjy[i]*dt
 
-        # update conditions for the small body
+        
+
+        # get the net acceleration of the small body
         g = myf.gravity(x[i-1], y[i-1]) + mjup * myf.gravity(x[i-1] - xj[i-1], y[i-1] - yj[i-1])
 
+        # update conditions for the small body
         vx[i] = vx[i-1] + g[0]*dt
         vy[i] = vy[i-1] + g[1]*dt
         x[i] = x[i-1] + vx[i]*dt
@@ -71,8 +74,9 @@ def main(mjup, x0, y0, vx0, vy0, timespan, ver):
 
     plt.gcf().set_size_inches(6,6)
     plt.plot(x, y, label=ver['small'])
+    plt.plot(0, 0, label='Sun', marker='o', linestyle='none')
     plt.plot(xj, yj, label=ver['big'])
-    plt.legend()
+    plt.legend(loc='upper right')
     plt.xlabel('$x$ (AU)')
     plt.ylabel('$y$ (AU)')
     plt.title('Orbital Position')
