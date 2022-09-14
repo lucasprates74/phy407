@@ -74,8 +74,9 @@ def main(mjup, x0, y0, vx0, vy0, timespan, ver):
 
     plt.gcf().set_size_inches(6,6)
     plt.plot(x, y, label=ver['small'])
+    plt.plot(0, 0, label='Sun', marker='o', linestyle='none')
     plt.plot(xj, yj, label=ver['big'])
-    plt.legend()
+    plt.legend(loc='upper right')
     plt.xlabel('$x$ (AU)')
     plt.ylabel('$y$ (AU)')
     plt.title('Orbital Position')

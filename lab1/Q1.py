@@ -40,7 +40,9 @@ def main(func, ver): #Main algorithm for computing and plotting orbits
     time = np.array(range(N))*dt
 
     plt.gcf().set_size_inches(6,6)
-    plt.plot(x, y)
+    plt.plot(x, y, label='Mercury')
+    plt.plot(0, 0, label='Sun', marker='o', linestyle='none')
+    plt.legend()
     plt.xlabel('$x$ (AU)')
     plt.ylabel('$y$ (AU)')
     plt.title('Orbital Position ({})'.format(ver))
