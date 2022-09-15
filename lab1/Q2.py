@@ -1,6 +1,11 @@
+"""
+Q2 code. The orbit of Jupiter, Earth, and an asteroid is computed and plotted with different properties of these bodies modified.
+Author: Lucas Prates
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 import myFunctions as myf
+plt.rcParams.update({'font.size': 16}) # change plot font size
 
 # initial conditions for earth
 xe0, ye0 = 1, 0  # AU
@@ -81,8 +86,8 @@ def main(mjup, x0, y0, vx0, vy0, timespan, ver):
     plt.xlabel('$x$ (AU)')
     plt.ylabel('$y$ (AU)')
     plt.title('Orbital Position')
-    # plt.savefig('lab1/img/Q2position_{0}_{1}'.format(ver['small'], ver['big']))
-    # plt.clf()
+    plt.savefig('lab1/img/Q2position_{0}_{1}'.format(ver['small'], ver['big']), dpi=300, bbox_inches="tight")
+    plt.clf()
     plt.show()
 
 if __name__ == '__main__':

@@ -20,7 +20,7 @@ def gravity(x, y):
     """
     coords = np.array([x, y])
     r = np.sqrt(x**2 + y**2)
-    return -G * coords / r ** 3
+    return -G * coords / r ** 3 
 
 def gravity_rel(x, y):
     """

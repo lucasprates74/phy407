@@ -5,6 +5,8 @@ Authors: Sam De Abreu
 import numpy as np
 import matplotlib.pyplot as plt
 import myFunctions as myf
+plt.rcParams.update({'font.size': 16})
+
 # initial conditions
 x0, y0 = .47, 0  # AU
 vx0, vy0 = 0, 8.17  # AU / yr
@@ -42,23 +44,23 @@ def main(func, ver): #Main algorithm for computing and plotting orbits
     plt.gcf().set_size_inches(6,6)
     plt.plot(x, y, label='Mercury')
     plt.plot(0, 0, label='Sun', marker='o', linestyle='none')
-    plt.legend()
+    plt.legend(loc='upper right')
     plt.xlabel('$x$ (AU)')
     plt.ylabel('$y$ (AU)')
     plt.title('Orbital Position ({})'.format(ver))
-    # plt.savefig('lab1/img/Q1position_{0}.png'.format(ver))
-    # plt.clf()
+    plt.savefig('lab1/img/Q1position_{0}.png'.format(ver), dpi=300, bbox_inches="tight")
+    plt.clf()
     plt.show()
 
     #Plot velocity components
     plt.plot(time, vx, label='$v_x$')
-    plt.plot(time, vy, label='$v_y$')
+    plt.plot(time, vy, label='$v_y$', color='green')
     plt.legend()
     plt.xlabel('Time $t$ (yr)')
     plt.ylabel('Velocity AU/yr)')
     plt.title('Velocity vs Time ({})'.format(ver))
-    # plt.savefig('lab1/img/Q1velocity_{0}.png'.format(ver))
-    # plt.clf()
+    plt.savefig('lab1/img/Q1velocity_{0}.png'.format(ver), dpi=300, bbox_inches="tight")
+    plt.clf()
     plt.show()
 
     #Plot angular momentum magnitude
@@ -66,10 +68,10 @@ def main(func, ver): #Main algorithm for computing and plotting orbits
     plt.plot(time, L)
     plt.ylim(2,5)
     plt.xlabel('Time $t$ (yr)')
-    plt.ylabel('Angular Momentum per unit mass $||\\overrightarrow{{L}}||/M_M$ (AU$^2$/yr)')
+    plt.ylabel('Angular Momentum per unit mass $||\\mathbf{{L}}||/M_M$ (AU$^2$/yr)')
     plt.title('Angular Momentum vs Time ({})'.format(ver))
-    # plt.savefig('lab1/img/Q1angularmomentum_{0}.png'.format(ver))
-    # plt.clf()
+    plt.savefig('lab1/img/Q1angularmomentum_{0}.png'.format(ver), dpi=300, bbox_inches="tight")
+    plt.clf()
     plt.show()
 
 if __name__ == '__main__':

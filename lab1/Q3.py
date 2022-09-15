@@ -5,6 +5,7 @@ Authors: Sam De Abreu & Lucas Prates
 import numpy as np
 import matplotlib.pyplot as plt
 from time import time
+plt.rcParams.update({'font.size': 16}) # change plot font size
 
 #Initialize variables 
 skip = 4 #Only compute for every 4th step
@@ -39,19 +40,19 @@ plt.plot(input, t)
 plt.xlabel('Input Size $N$')
 plt.ylabel('Time to Run $t$ (s)')
 plt.title('Matrix Multipilcation Runtime $t(N)$')
-# plt.savefig('lab1/img/Q3Fig1.png')
-# plt.clf()
+plt.savefig('lab1/img/Q3Fig1.png', dpi=300, bbox_inches="tight")
+plt.clf()
 plt.show()
 
 
-#Plot t(N^3)
+#Plot t(N) against N^3
 input = np.array(list(range(N//skip)))**3
 plt.plot(input, t)
 plt.xlabel('Input Size Cubed $N^3$')
 plt.ylabel('Time to Run $t$ (s)')
-plt.title('Matrix Multiplication Runtime $t(N^3)$')
-# plt.savefig('lab1/img/Q3Fig2.png')
-# plt.clf()
+plt.title('Matrix Multiplication Runtime $t(N)$ against $N^3$')
+plt.savefig('lab1/img/Q3Fig2.png', dpi=300, bbox_inches="tight")
+plt.clf()
 plt.show()
 
 #Plot t(N) for numpy method
@@ -61,6 +62,6 @@ plt.xlabel('Input Size $N$')
 plt.ylabel('Time to Run $t$ (s)')
 plt.title('Matrix Multiplication Runtime $t(N)$ using np.dot')
 plt.ylim(-0.1, 0.1)
-# plt.savefig('lab1/img/Q3Fig3.png')
-# plt.clf()
+plt.savefig('lab1/img/Q3Fig3.png', dpi=300, bbox_inches="tight")
+plt.clf()
 plt.show()
