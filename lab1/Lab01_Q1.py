@@ -4,7 +4,7 @@ Authors: Sam De Abreu
 """
 import numpy as np
 import matplotlib.pyplot as plt
-import myFunctions as myf
+import Lab01_myFunctions as myf
 plt.rcParams.update({'font.size': 16})
 
 # initial conditions
