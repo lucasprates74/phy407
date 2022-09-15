@@ -86,8 +86,8 @@ def main(mjup, x0, y0, vx0, vy0, timespan, ver):
     plt.xlabel('$x$ (AU)')
     plt.ylabel('$y$ (AU)')
     plt.title('Orbital Position')
-    plt.savefig('lab1/img/Q2position_{0}_{1}'.format(ver['small'], ver['big']), dpi=300, bbox_inches="tight")
-    plt.clf()
+    #plt.savefig('lab1/img/Q2position_{0}_{1}'.format(ver['small'], ver['big']), dpi=300, bbox_inches="tight")
+    #plt.clf()
     plt.show()
 
 if __name__ == '__main__':

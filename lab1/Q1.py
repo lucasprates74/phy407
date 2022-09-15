@@ -48,8 +48,8 @@ def main(func, ver): #Main algorithm for computing and plotting orbits
     plt.xlabel('$x$ (AU)')
     plt.ylabel('$y$ (AU)')
     plt.title('Orbital Position ({})'.format(ver))
-    plt.savefig('lab1/img/Q1position_{0}.png'.format(ver), dpi=300, bbox_inches="tight")
-    plt.clf()
+    #plt.savefig('lab1/img/Q1position_{0}.png'.format(ver), dpi=300, bbox_inches="tight")
+    #plt.clf()
     plt.show()
 
     #Plot velocity components
@@ -59,8 +59,8 @@ def main(func, ver): #Main algorithm for computing and plotting orbits
     plt.xlabel('Time $t$ (yr)')
     plt.ylabel('Velocity AU/yr)')
     plt.title('Velocity vs Time ({})'.format(ver))
-    plt.savefig('lab1/img/Q1velocity_{0}.png'.format(ver), dpi=300, bbox_inches="tight")
-    plt.clf()
+    #plt.savefig('lab1/img/Q1velocity_{0}.png'.format(ver), dpi=300, bbox_inches="tight")
+    #plt.clf()
     plt.show()
 
     #Plot angular momentum magnitude
@@ -70,8 +70,8 @@ def main(func, ver): #Main algorithm for computing and plotting orbits
     plt.xlabel('Time $t$ (yr)')
     plt.ylabel('Angular Momentum per unit mass $||\\mathbf{{L}}||/M_M$ (AU$^2$/yr)')
     plt.title('Angular Momentum vs Time ({})'.format(ver))
-    plt.savefig('lab1/img/Q1angularmomentum_{0}.png'.format(ver), dpi=300, bbox_inches="tight")
-    plt.clf()
+    #plt.savefig('lab1/img/Q1angularmomentum_{0}.png'.format(ver), dpi=300, bbox_inches="tight")
+    #plt.clf()
     plt.show()
 
 if __name__ == '__main__':
