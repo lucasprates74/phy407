@@ -1,6 +1,9 @@
 import numpy as np 
 
 def integral_trap(func, a, b, N):
+    """
+    Integrates func from a to b by approximating with N trapezoids.
+    """
     dx = (b - a) / N
 
     val = 0.5 * (func(a) + func(b))
@@ -12,6 +15,9 @@ def integral_trap(func, a, b, N):
 
 
 def integral_simp(func, a, b, N):
+    """
+    Integrates func from a to b by approximating with N quadratics.
+    """
     dx = (b - a) / N
 
     val = func(a) - func(b)
