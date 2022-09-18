@@ -1,6 +1,6 @@
 import numpy as np 
 
-def integral_trap(func, a, b, N):
+def trap_rule(func, a, b, N):
     """
     Integrates func from a to b by approximating with N trapezoids.
     """
@@ -14,7 +14,7 @@ def integral_trap(func, a, b, N):
     return val * dx
 
 
-def integral_simp(func, a, b, N):
+def simp_rule(func, a, b, N):
     """
     Integrates func from a to b by approximating with N quadratics.
     """
@@ -28,5 +28,5 @@ def integral_simp(func, a, b, N):
     return val * dx / 3
 
 if __name__ == '__main__':
-    print(integral_trap(np.sin, 0, np.pi, 10 ** 6))
-    print(integral_simp(np.sin, 0, np.pi, 10 ** 6))
+    print(trap_rule(np.sin, 0, np.pi, 10 ** 6))
+    print(simp_rule(np.sin, 0, np.pi, 10 ** 6))
