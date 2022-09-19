@@ -1,5 +1,8 @@
 import numpy as np 
-
+"""
+Implementation of the integration rules used throughout this project.
+Authors: Lucas Prates
+"""
 def trap_rule(func, a, b, N):
     """
     Integrates func from a to b by approximating with N trapezoids.
