@@ -19,7 +19,7 @@ def get_rule_performance(rule):
     """
     Returns the number of slices required to evaluate an integral using the 
     method rule to an accuracy of acc. Also returns the time required to evaluate rule
-    at this accuracy
+    at this accuracy in seconds.
     """
 
     # double the value of N until the integral is evaluated to the desired accuracy
@@ -46,5 +46,5 @@ if __name__ == '__main__':
     N_trap, t_trap = get_rule_performance(myf.trap_rule)
     N_simp, t_simp = get_rule_performance(myf.simp_rule)
 
-    print('trapezoid rule: slices = {0}, time = {1}s'.format(N_trap, t_trap))
-    print('Simpson\'s rule: slices = {0}, time = {1}s'.format(N_simp, t_simp))
+    print('trapezoid rule: slices = {0}, time = {1}ms'.format(N_trap, t_trap * 1000))
+    print('Simpson\'s rule: slices = {0}, time = {1}ms'.format(N_simp, t_simp * 1000))
