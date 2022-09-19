@@ -12,12 +12,22 @@ def q(x):
 
 if __name__ == '__main__':
 
-    # part a
+    # initialize x array
     start, stop = 0.98, 1
     step = (stop - start) / 500
     x=np.arange(start, stop, step)
-    print(x)
-    plt.plot(x, p(x), label='p(x)', linestyle='none', marker='.')
-    plt.plot(x, q(x), label='q(x)', linestyle='none', marker='.')
+
+    # evaluate functions
+    pvals = p(x)
+    qvals = q(x)
+
+    # part a
+    plt.plot(x, pvals, label='p(x)', linestyle='none', marker='.')
+    plt.plot(x, qvals, label='q(x)', linestyle='none', marker='.')
     plt.legend()
+    plt.show()
+
+    # part b
+    diff = pvals - qvals
+    plt.hist(diff)
     plt.show()
