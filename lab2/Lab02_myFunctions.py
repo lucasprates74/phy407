@@ -19,7 +19,7 @@ def trap_rule(func, a, b, N):
 
 def simp_rule(func, a, b, N):
     """
-    Integrates func from a to b by approximating with N quadratics.
+    Integrates func from a to b by approximating with N quadratics. N must be even.
     """
     dx = (b - a) / N
 
@@ -29,6 +29,15 @@ def simp_rule(func, a, b, N):
         val += 4 * func(a + i * dx) + 2 * func(a + (i + 1) * dx)
         
     return val * dx / 3
+
+def trap_rule_err(func, a, b, N):
+    """
+    Returns the approximate error in the trapezoid rule approximation. N must be even.
+    """
+    integral2 = trap_rule(func, a, b, N) 
+    integral1 = trap_rule(func, a, b, N // 2)
+
+    return np.abs(integral2 - integral1) / 3
 
 if __name__ == '__main__':
     print(trap_rule(np.sin, 0, np.pi, 10 ** 6))
