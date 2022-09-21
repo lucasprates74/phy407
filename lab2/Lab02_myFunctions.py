@@ -20,6 +20,10 @@ def trap_rule(func, a, b, N):
 def simp_rule(func, a, b, N):
     """
     Integrates func from a to b by approximating with N quadratics. N must be even.
+    Note that this is slightly different to the formula in the textbook. The initial value
+    is func(a)-func(b) instead of func(a)+func(b), and the even sum runs from 2...N instead of 2...N-2.
+    Mathematically, these two changes cancel out. But numerically, there will be a slight deviation
+    from the predictions made by the textbook's version of simpson's rule.
     """
     dx = (b - a) / N
 
