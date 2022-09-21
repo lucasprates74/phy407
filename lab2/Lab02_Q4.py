@@ -54,7 +54,7 @@ if __name__ == '__main__':
     # part c
     relative_err = myf.rel_error(pvals, qvals)
 
-    upper=30
+    upper=60
     plt.plot(x[:upper], relative_err[:upper], linestyle='none', marker='.')
     plt.show()
 
