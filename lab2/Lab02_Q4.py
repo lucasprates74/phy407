@@ -1,6 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
+"""
+Code for question 4. Here we see the effects of roundoff error by studying the same polynomial
+in factored and expanded form.
 
+Authors: Lucas Prates
+"""
 C = 10 ** - 16
 
 def p(x):
@@ -39,10 +44,10 @@ if __name__ == '__main__':
     plt.hist(diff, bins=30, edgecolor='black')
     plt.show()
 
-    expected_std = np.std(diff, ddof=1)
-    sigma = C * np.sqrt(len(diff) * np.mean(diff ** 2))
-    print('Standard Deviation:', expected_std)
-    print('Sigma:', sigma)
+    actual_std = np.std(diff, ddof=1)
+    expected_std = C * np.sqrt(len(diff) * np.mean(diff ** 2))
+    print('Expected Standard Deviation:', actual_std)
+    print('Actual Standard Deviation:', expected_std)
 
 
     # part c
@@ -54,6 +59,6 @@ if __name__ == '__main__':
 
     # part d
     # plt.plot(x, linestyle='none', marker='.', label='constant value 1')
-    plt.plot(x, f(x)-np.ones(len(x)), linestyle='none', marker='.', label='f(x)')
+    plt.plot(x, f(x)-1, linestyle='none', marker='.', label='f(x)')
     plt.legend()
     plt.show()
