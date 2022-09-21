@@ -1,5 +1,9 @@
 import numpy as np
 import Lab02_myFunctions as myf
+"""
+Code for question 1. 
+Authors: Sam de Abreu & Lucas Prates
+"""
 # Import data to take the standard deviation (std) of
 carr = np.loadtxt('cdata.txt')
 
@@ -28,12 +32,11 @@ def std_eqn2(data):
     return val
 
 def std_eqn3(data):
-    n = len(data)
-    s = 0
-    data_mean = np.mean(data)
-    for i in range(n):
-        s += (data[i]+data_mean)*(data[i]-data_mean)
-    return np.sqrt(s/(n-1))
+    """
+    computes the standard deviation using equation 2, on a dataset with effective mean 0.
+    """
+    mean = np.mean(data)
+    return std_eqn2(data-mean)
 
 
 
