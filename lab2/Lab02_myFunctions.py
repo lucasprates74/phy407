@@ -30,6 +30,12 @@ def simp_rule(func, a, b, N):
         
     return val * dx / 3
 
+def rel_error(expected, estimated):
+    """
+    Computes the relative error of the estimated value with the expected value.
+    """
+    return abs((estimated-expected)/expected)
+
 if __name__ == '__main__':
     print(trap_rule(np.sin, 0, np.pi, 10 ** 6))
     print(simp_rule(np.sin, 0, np.pi, 10 ** 6))
