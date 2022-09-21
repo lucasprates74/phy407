@@ -48,3 +48,8 @@ if __name__ == '__main__':
 
     print('trapezoid rule: slices = {0}, time = {1}ms'.format(N_trap, t_trap * 1000))
     print('Simpson\'s rule: slices = {0}, time = {1}ms'.format(N_simp, t_simp * 1000))
+
+    # part d
+    I_trap = myf.trap_rule(f, a, b, 32)
+    I_err = myf.trap_rule_err(f, a, b, 32)
+    print('trap rule w/ N=32 and err:', I_trap, '+/-', I_err)
