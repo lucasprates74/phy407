@@ -34,6 +34,7 @@ def simp_rule(func, a, b, N):
         
     return val * dx / 3
 
+
 def trap_rule_err(func, a, b, N):
     """
     Returns the approximate error in the trapezoid rule approximation. N must be even.
@@ -42,6 +43,12 @@ def trap_rule_err(func, a, b, N):
     integral1 = trap_rule(func, a, b, N // 2)
 
     return np.abs(integral2 - integral1) / 3
+
+def rel_error(expected, estimated):
+    """
+    Computes the relative error of the estimated value with the expected value.
+    """
+    return abs((estimated-expected)/expected)
 
 if __name__ == '__main__':
     print(trap_rule(np.sin, 0, np.pi, 10 ** 6))
