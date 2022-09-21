@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+C = 10 ** - 16
 
 def p(x):
     return (1 - x) ** 8
@@ -29,5 +30,21 @@ if __name__ == '__main__':
 
     # part b
     diff = pvals - qvals
-    plt.hist(diff)
+    plt.plot(x, diff, linestyle='none', marker='.')
+    plt.show()
+
+    plt.hist(diff, bins=30, edgecolor='black')
+    plt.show()
+
+    # expected_std = np.std(diff, ddof=1)
+    # sigma = C * np.sqrt(len(diff) * np.mean(diff ** 2))
+    # print('Standard Deviation:', expected_std)
+    # print('Sigma:', sigma)
+
+
+    # part c
+    relative_err = np.abs(pvals - qvals) / np.abs(pvals)
+
+    upper=60
+    plt.plot(x[:upper], relative_err[:upper], linestyle='none', marker='.')
     plt.show()
