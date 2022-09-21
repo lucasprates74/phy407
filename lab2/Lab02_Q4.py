@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import Lab02_myFunctions as myf
 """
 Code for question 4. Here we see the effects of roundoff error by studying the same polynomial
 in factored and expanded form.
@@ -51,7 +52,7 @@ if __name__ == '__main__':
 
 
     # part c
-    relative_err = np.abs(pvals - qvals) / np.abs(pvals)
+    relative_err = myf.rel_error(pvals, qvals)
 
     upper=30
     plt.plot(x[:upper], relative_err[:upper], linestyle='none', marker='.')
