@@ -29,7 +29,6 @@ def std_eqn2(data):
     data_mean = np.mean(data)
     for i in range(n):
         s += data[i]**2
-    print(s, n*data_mean**2, data_mean)
     try:
         val = np.sqrt((s-n*data_mean**2)/(n-1))
     except RuntimeWarning:
