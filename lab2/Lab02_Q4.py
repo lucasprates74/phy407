@@ -42,7 +42,7 @@ if __name__ == '__main__':
     pvals = p(u)
     qvals = q(u)
 
-    # part a
+    # part a plots
     plt.plot(u, pvals, label='p(u)', linestyle='none', marker='.')
     plt.plot(u, qvals, label='q(u)', linestyle='none', marker='.')
     plt.legend()
@@ -50,22 +50,22 @@ if __name__ == '__main__':
     plt.clf()
 
     # part b
-    diff = pvals - qvals
+    diff = pvals - qvals # p(u) - q(u) evaluated over the range of u
     plt.plot(u, diff, linestyle='none', marker='.')
     plt.xlabel('$u$')
     plt.ylabel('Numerical Error $\\varepsilon(u)=p(u)-q(u)$')
-    plt.title('Numerical Error $\\varepsilon(u)$ over $u\\in[0.98,1.02]$')
+    plt.title('Numerical Error $\\varepsilon(u)$')
     plt.savefig('Q4pqDiff.png', dpi=300, bbox_inches='tight')
     plt.clf()
 
     actual_std = np.std(diff, ddof=1) # calculate std in the histogram from before
-    actual_mean = np.mean(diff)
+    actual_mean = np.mean(diff) # Mean of error distribution
     test_value = 1.2 # a value at which to calculate the std of p(u)-q(u)
-    expected_std = C * np.sqrt((len(term_arr(test_value))) * (np.mean(term_arr(test_value) ** 2)))
+    expected_std = C * np.sqrt((len(term_arr(test_value))) * (np.mean(term_arr(test_value) ** 2))) # Equation (3) from lan handout
     print('Actual Standard Deviation:', actual_std)
     print('Expected Standard Deviation:', expected_std)
 
-    plt.hist(diff, bins=30, edgecolor='black')
+    plt.hist(diff, bins=30, edgecolor='black') # plot histogram
     plt.ylabel('Frequency')
     plt.text(-3e-14,50, '$\\mu=${0}\n$\\sigma=${1}'.format(round(actual_mean, 17), round(actual_std, 17)), fontsize=12.5)
     plt.title('Histogram ($n_{{bins}}=30$) of $\\varepsilon(u)$ over $u\\in[0.98,1.02]$')
@@ -76,9 +76,9 @@ if __name__ == '__main__':
 
 
     # part c
-    relative_err = myf.rel_error(pvals, qvals)
+    relative_err = myf.rel_error(pvals, qvals) # Compute relative error
 
-    upper=60
+    upper = 60 # upper bound for range of u before relative error heavily diverges
     plt.plot(u[:upper], relative_err[:upper], linestyle='none', marker='.')
     plt.xlabel('$u$')
     plt.ylabel('Relative Error $\\varepsilon_{rel}(u)$')
