@@ -1,11 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import Lab02_myFunctions as myf
+plt.rcParams.update({'font.size': 16}) # change plot font size
 """
 Code for question 4. Here we see the effects of roundoff error by studying the same polynomial
 in factored and expanded form.
 
-Authors: Lucas Prates
+Authors: Lucas Prates & Sam De Abreu
 """
 C = 10 ** - 16
 
@@ -30,7 +31,7 @@ def f(u):
 if __name__ == '__main__':
 
     # initialize x array
-    start, stop = 0.5, 2
+    start, stop = 0.98, 1.02
     step = (stop - start) / 500
     u=np.arange(start, stop, step)
 
@@ -42,22 +43,33 @@ if __name__ == '__main__':
     plt.plot(u, pvals, label='p(u)', linestyle='none', marker='.')
     plt.plot(u, qvals, label='q(u)', linestyle='none', marker='.')
     plt.legend()
-    plt.show()
+    plt.savefig('Q4pq.png', dpi=300, bbox_inches='tight')
+    plt.clf()
 
     # part b
     diff = pvals - qvals
     plt.plot(u, diff, linestyle='none', marker='.')
-    plt.show()
-
-    plt.hist(diff, bins=30, edgecolor='black')
-    plt.show()
+    plt.xlabel('$u$')
+    plt.ylabel('Numerical Error $\\varepsilon(u)=p(u)-q(u)$')
+    plt.title('Numerical Error $\\varepsilon(u)$ over $u\\in[0.98,1.02]$')
+    plt.savefig('Q4pqDiff.png', dpi=300, bbox_inches='tight')
+    plt.clf()
 
     actual_std = np.std(diff, ddof=1) # calculate std in the histogram from before
-
-    test_value = 1.9 # a value at which to calculate the std of p(u)-q(u)
+    actual_mean = np.mean(diff)
+    test_value = 1.2 # a value at which to calculate the std of p(u)-q(u)
     expected_std = C * np.sqrt((len(term_arr(test_value))) * (np.mean(term_arr(test_value) ** 2)))
     print('Actual Standard Deviation:', actual_std)
     print('Expected Standard Deviation:', expected_std)
+
+    plt.hist(diff, bins=30, edgecolor='black')
+    plt.ylabel('Frequency')
+    plt.text(-3e-14,50, '$\\mu=${0}\n$\\sigma=${1}'.format(round(actual_mean, 17), round(actual_std, 17)), fontsize=12.5)
+    plt.title('Histogram ($n_{{bins}}=30$) of $\\varepsilon(u)$ over $u\\in[0.98,1.02]$')
+    plt.xlabel('Numerical Error $\\varepsilon(u)$')
+    plt.savefig('Q4pqHisto.png', dpi=300, bbox_inches='tight')
+    plt.clf()
+
 
 
     # part c
