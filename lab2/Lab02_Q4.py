@@ -77,9 +77,18 @@ if __name__ == '__main__':
 
     upper=60
     plt.plot(u[:upper], relative_err[:upper], linestyle='none', marker='.')
-    plt.show()
+    plt.xlabel('$u$')
+    plt.ylabel('Relative Error $\\varepsilon_{rel}(u)$')
+    plt.title('Relative Error vs u')
+    plt.savefig('Q4pqRelErr.png', dpi=300, bbox_inches='tight')
+    plt.clf()
 
     # part d
     plt.plot(u, f(u)-1, linestyle='none', marker='.', label='f(x)')
     plt.legend()
-    plt.show()
+    plt.xlabel('u')
+    plt.ylabel('Numerical Error $f(u)-1$')
+    plt.title('Numerical Error $\\varepsilon(u)$')
+    plt.savefig('Q4pqRatio.png', dpi=300, bbox_inches='tight')
+    plt.clf()
+    
