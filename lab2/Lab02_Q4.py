@@ -26,6 +26,9 @@ def term_arr(u):
     return np.array([p(u), -1, 8 * u, -28 * u ** 2, 56 * u ** 3, -70 * u ** 4, 56 * u ** 5, -28 * u ** 6, 8 * u ** 7, -u ** 8])
 
 def f(u):
+    """
+    A raio mathematically equivalent to 1, for u != 0. Used to study round-off error in multiplication and division.
+    """
     return  (u ** 8) / ((u ** 4) * (u ** 4))
 
 if __name__ == '__main__':
