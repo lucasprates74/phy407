@@ -90,7 +90,7 @@ if __name__ == '__main__':
     plt.plot(u, f(u)-1, linestyle='none', marker='.', label='f(x)')
     plt.xlabel('u')
     plt.ylabel('Numerical Error $f(u)-1$')
-    plt.title('Numerical Error $\\varepsilon(u)$')
+    plt.title('Numerical Error vs $u$')
     plt.savefig('Q4pqRatio.png', dpi=300, bbox_inches='tight')
     plt.clf()
     
