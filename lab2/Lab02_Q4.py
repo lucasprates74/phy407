@@ -87,7 +87,7 @@ if __name__ == '__main__':
     plt.clf()
 
     # part d
-    plt.plot(u, f(u)-1, linestyle='none', marker='.', label='f(x)')
+    plt.plot(u, f(u)-1, linestyle='none', marker='.')
     plt.xlabel('u')
     plt.ylabel('Numerical Error $f(u)-1$')
     plt.title('Numerical Error vs $u$')
