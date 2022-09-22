@@ -1,7 +1,7 @@
 import numpy as np 
 """
 Implementation of the integration rules used throughout this project.
-Authors: Lucas Prates
+Authors: Lucas Prates & Sam De Abreu
 """
 def trap_rule(func, a, b, N):
     """
