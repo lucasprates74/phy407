@@ -88,7 +88,6 @@ if __name__ == '__main__':
 
     # part d
     plt.plot(u, f(u)-1, linestyle='none', marker='.', label='f(x)')
-    plt.legend()
     plt.xlabel('u')
     plt.ylabel('Numerical Error $f(u)-1$')
     plt.title('Numerical Error $\\varepsilon(u)$')
