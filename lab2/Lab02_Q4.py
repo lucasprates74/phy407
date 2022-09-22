@@ -9,57 +9,65 @@ Authors: Lucas Prates
 """
 C = 10 ** - 16
 
-def p(x):
-    return (1 - x) ** 8
+def p(u):
+    return (1 - u) ** 8
 
 
-def q(x):
-    """Algebraically expanded form of (1 - x) ** 8. Absolutely horrendous looking"""
-    return 1 - 8 * x + 28 * x ** 2 - 56 * x ** 3 + 70 * x ** 4 - 56 * x ** 5 + 28 * x ** 6 - 8 * x ** 7 + x ** 8
+def q(u):
+    """Algebraically expanded form of (1 - u) ** 8. Absolutely horrendous looking"""
+    return 1 - 8 * u + 28 * u ** 2 - 56 * u ** 3 + 70 * u ** 4 - 56 * u ** 5 + 28 * u ** 6 - 8 * u ** 7 + u ** 8
 
-def f(x):
-    return  (x ** 8) / ((x ** 4) * (x ** 4))
+def term_arr(u):
+    """
+    A numpy array which gives p(u)-q(u) when summed. This function exists only to make error
+    propagation easier.
+    """
+    return np.array([p(u), -1, 8 * u, -28 * u ** 2, 56 * u ** 3, -70 * u ** 4, 56 * u ** 5, -28 * u ** 6, 8 * u ** 7, -u ** 8])
+
+def f(u):
+    return  (u ** 8) / ((u ** 4) * (u ** 4))
 
 if __name__ == '__main__':
 
     # initialize x array
-    start, stop = 0.98, 1.02
+    start, stop = 0.5, 2
     step = (stop - start) / 500
-    x=np.arange(start, stop, step)
+    u=np.arange(start, stop, step)
 
     # evaluate functions
-    pvals = p(x)
-    qvals = q(x)
+    pvals = p(u)
+    qvals = q(u)
 
     # part a
-    plt.plot(x, pvals, label='p(x)', linestyle='none', marker='.')
-    plt.plot(x, qvals, label='q(x)', linestyle='none', marker='.')
+    plt.plot(u, pvals, label='p(u)', linestyle='none', marker='.')
+    plt.plot(u, qvals, label='q(u)', linestyle='none', marker='.')
     plt.legend()
     plt.show()
 
     # part b
     diff = pvals - qvals
-    plt.plot(x, diff, linestyle='none', marker='.')
+    plt.plot(u, diff, linestyle='none', marker='.')
     plt.show()
 
     plt.hist(diff, bins=30, edgecolor='black')
     plt.show()
 
-    actual_std = np.std(diff, ddof=1)
-    expected_std = C * np.sqrt(len(diff) * np.mean(diff ** 2))
-    print('Expected Standard Deviation:', actual_std)
-    print('Actual Standard Deviation:', expected_std)
+    actual_std = np.std(diff, ddof=1) # calculate std in the histogram from before
+
+    test_value = 1.9 # a value at which to calculate the std of p(u)-q(u)
+    expected_std = C * np.sqrt((len(term_arr(test_value))) * (np.mean(term_arr(test_value) ** 2)))
+    print('Actual Standard Deviation:', actual_std)
+    print('Expected Standard Deviation:', expected_std)
 
 
     # part c
     relative_err = myf.rel_error(pvals, qvals)
 
     upper=60
-    plt.plot(x[:upper], relative_err[:upper], linestyle='none', marker='.')
+    plt.plot(u[:upper], relative_err[:upper], linestyle='none', marker='.')
     plt.show()
 
     # part d
-    # plt.plot(x, linestyle='none', marker='.', label='constant value 1')
-    plt.plot(x, f(x)-1, linestyle='none', marker='.', label='f(x)')
+    plt.plot(u, f(u)-1, linestyle='none', marker='.', label='f(x)')
     plt.legend()
     plt.show()
