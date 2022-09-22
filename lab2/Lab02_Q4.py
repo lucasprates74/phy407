@@ -46,8 +46,9 @@ if __name__ == '__main__':
     plt.plot(u, pvals, label='p(u)', linestyle='none', marker='.')
     plt.plot(u, qvals, label='q(u)', linestyle='none', marker='.')
     plt.legend()
-    plt.savefig('Q4pq.png', dpi=300, bbox_inches='tight')
-    plt.clf()
+    # plt.savefig('Q4pq.png', dpi=300, bbox_inches='tight')
+    # plt.clf()
+    plt.show()
 
     # part b
     diff = pvals - qvals # p(u) - q(u) evaluated over the range of u
@@ -55,8 +56,9 @@ if __name__ == '__main__':
     plt.xlabel('$u$')
     plt.ylabel('Numerical Error $\\varepsilon(u)=p(u)-q(u)$')
     plt.title('Numerical Error $\\varepsilon(u)$')
-    plt.savefig('Q4pqDiff.png', dpi=300, bbox_inches='tight')
-    plt.clf()
+    # plt.savefig('Q4pqDiff.png', dpi=300, bbox_inches='tight')
+    # plt.clf()
+    plt.show()
 
     actual_std = np.std(diff, ddof=1) # calculate std in the histogram from before
     actual_mean = np.mean(diff) # Mean of error distribution
@@ -70,9 +72,9 @@ if __name__ == '__main__':
     plt.text(-3e-14,50, '$\\mu=${0}\n$\\sigma=${1}'.format(round(actual_mean, 17), round(actual_std, 17)), fontsize=12.5)
     plt.title('Histogram ($n_{{bins}}=30$) of $\\varepsilon(u)$ over $u\\in[0.98,1.02]$')
     plt.xlabel('Numerical Error $\\varepsilon(u)$')
-    plt.savefig('Q4pqHisto.png', dpi=300, bbox_inches='tight')
-    plt.clf()
-
+    # plt.savefig('Q4pqHisto.png', dpi=300, bbox_inches='tight')
+    # plt.clf()
+    plt.show()
 
 
     # part c
@@ -83,14 +85,16 @@ if __name__ == '__main__':
     plt.xlabel('$u$')
     plt.ylabel('Relative Error $\\varepsilon_{rel}(u)$')
     plt.title('Relative Error vs u')
-    plt.savefig('Q4pqRelErr.png', dpi=300, bbox_inches='tight')
-    plt.clf()
+    # plt.savefig('Q4pqRelErr.png', dpi=300, bbox_inches='tight')
+    # plt.clf()
+    plt.show()
 
     # part d
     plt.plot(u, f(u)-1, linestyle='none', marker='.')
     plt.xlabel('u')
     plt.ylabel('Numerical Error $f(u)-1$')
     plt.title('Numerical Error vs $u$')
-    plt.savefig('Q4pqRatio.png', dpi=300, bbox_inches='tight')
-    plt.clf()
+    # plt.savefig('Q4pqRatio.png', dpi=300, bbox_inches='tight')
+    # plt.clf()
+    plt.show()
     
