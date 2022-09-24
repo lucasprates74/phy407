@@ -22,26 +22,28 @@ EXPECTED = -f(a)  # the expected value of the derivative of f at x=0.5
 
 def main(rule):
     """
-    Given a numerical differentiation rule, "rule", returns the numerical error
-    in the rule for the function f defined above for 17 different step sizes.
+    Given a numerical differentiation rule, "rule", returns the derivative value
+    predicted by that rule, and the numerical error in the rule for the function f 
+    defined above for 17 different step sizes.
     """
     derivative_arr = []
 
     for h in h_arr:
         derivative_arr.append(rule(f, a, h))
     
-    return np.abs(np.array(derivative_arr)-EXPECTED)
+    return derivative_arr, np.abs(np.array(derivative_arr)-EXPECTED)
 
     
 
 if __name__ == '__main__':
-    forward_err = main(myf.forward_diff)
-    central_err = main(myf.central_diff)
+    forward, forward_err = main(myf.forward_diff)
+    central, central_err = main(myf.central_diff)
 
     # part a
-    print('step size    ', 'error')
+    # print Latex table
+    print('$h$ & Approximation of $f(0.5)$ & $\\varepsilon(h)$ \\\\')
     for i in range(len(h_arr)):
-        print(h_arr[i], forward_err[i])
+        print(h_arr[i], ' & ', forward[i], '&', forward_err[i], '\\\\')
 
     # part b
     plt.plot(h_arr, forward_err, linestyle='none', marker='.')
@@ -50,6 +52,8 @@ if __name__ == '__main__':
     plt.xlabel('step size $h$')
     plt.ylabel('Error $\\varepsilon(h)$')
     plt.title('Error in numerical derivative vs step size')
+    plt.gcf()
+    plt.savefig('Q1b.png')
     plt.show()
 
     # part c
@@ -61,6 +65,8 @@ if __name__ == '__main__':
     plt.xlabel('step size $h$')
     plt.ylabel('Error $\\varepsilon(h)$')
     plt.title('Error in numerical derivative vs step size')
+    plt.gcf()
+    plt.savefig('Q1c.png')
     plt.show()
 
     
