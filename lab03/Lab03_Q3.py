@@ -1,7 +1,6 @@
 import numpy as np 
 import matplotlib.pyplot as plt
 import Lab03_myFunctions as myf
-from gaussxw import gaussxwab
 
 N = 100
 
@@ -30,14 +29,14 @@ def expec_p_squared_integrand(n, x):
     return abs(psi_x(n, np.tan(x)))**2/np.cos(x)**2
 
 def expec_x_squared(n):
-    x, w = gaussxwab(N, -np.pi/2, np.pi/2)
+    x, w = myf.gaussxwab(N, -np.pi/2, np.pi/2)
     s = 0
     for i in range(len(x)):
         s += w[i]*expec_x_squared_integrand(n, x[i])
     return s
 
 def expec_p_squared(n):
-    x, w = gaussxwab(N, -np.pi/2, np.pi/2)
+    x, w = myf.gaussxwab(N, -np.pi/2, np.pi/2)
     s = 0
     for i in range(len(x)):
         s += w[i]*expec_p_squared_integrand(n, x[i])
