@@ -2,6 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import Lab03_myFunctions as myf
 plt.rcParams.update({'font.size': 16}) # change plot font size
+"""
+Question 3 code. Calculates the nth wavefunction and its <X^2>, <P^2> and E_n as well as plots some relationships.
+Author: Sam De Abreu
+"""
 # Constants 
 N = 100 # Number of points for Gaussian quadrature on
 
