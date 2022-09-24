@@ -104,7 +104,7 @@ if __name__ == '__main__':
     plt.plot(x_values, psi(30, x_values), label='$\\psi_{{{0}}}(x)$'.format(30))
     plt.xlabel('x')
     plt.ylabel('$\\psi_{{30}}(x)$')
-    plt.title('$n=30$ Wavefunction $\\psi_30(x)$')
+    plt.title('Quantum Harmonic Oscillator Wavefunction $\\psi_{{30}}(x)$')
     plt.grid()
     plt.savefig('Q3Bigwavefunction.png', dpi=300, bbox_inches='tight')
     plt.show() 
