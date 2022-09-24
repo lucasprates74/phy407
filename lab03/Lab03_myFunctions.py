@@ -1,4 +1,7 @@
-
+"""
+Implement important functions used throughout the project.
+Authors: Lucas Prates
+"""
 
 def forward_diff(func, a, h):
     """
