@@ -8,10 +8,10 @@ numerical differentiation techniques.
 Author: Lucas Prates
 """
 
-a = 0.5
+a = 0.5  # the value where we will evaluate the derivative of e**-x**2
 
-
-h_arr = np.power(10 * np.ones(17), np.arange(-16, 1))
+# generate a stepsize array ranging from 10**-16 to 1, incrementing by multiples of 10
+h_arr = np.power(10 * np.ones(17), np.arange(-16, 1)) 
 
 def f(x):
     return np.e ** (- x ** 2)
