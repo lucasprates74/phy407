@@ -53,7 +53,7 @@ if __name__ == '__main__':
     plt.ylabel('Error $\\varepsilon(h)$')
     plt.title('Error in numerical derivative vs step size')
     plt.gcf()
-    plt.savefig('Q1b.png')
+    plt.savefig('Q1b.png', dpi=300, bbox_inches='tight')
     plt.show()
 
     # part c
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     plt.ylabel('Error $\\varepsilon(h)$')
     plt.title('Error in numerical derivative vs step size')
     plt.gcf()
-    plt.savefig('Q1c.png')
+    plt.savefig('Q1c.png', dpi=300, bbox_inches='tight')
     plt.show()
 
     
