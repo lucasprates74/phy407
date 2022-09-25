@@ -1,6 +1,7 @@
 import numpy as np 
 import matplotlib.pyplot as plt
 import Lab03_myFunctions as myf
+plt.rcParams.update({'font.size': 16}) # change plot font size
 """
 The purpose of this script is to test the accuracy of the forward difference and central difference
 numerical differentiation techniques.
@@ -52,6 +53,7 @@ if __name__ == '__main__':
     plt.xlabel('step size $h$')
     plt.ylabel('Error $\\varepsilon(h)$')
     plt.title('Error in numerical derivative vs step size')
+    plt.grid()
     plt.gcf()
     plt.savefig('Q1b.png', dpi=300, bbox_inches='tight')
     plt.show()
@@ -65,6 +67,7 @@ if __name__ == '__main__':
     plt.xlabel('step size $h$')
     plt.ylabel('Error $\\varepsilon(h)$')
     plt.title('Error in numerical derivative vs step size')
+    plt.grid()
     plt.gcf()
     plt.savefig('Q1c.png', dpi=300, bbox_inches='tight')
     plt.show()

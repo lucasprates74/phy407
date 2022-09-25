@@ -2,6 +2,7 @@ import numpy as np
 import scipy.constants as CON
 import matplotlib.pyplot as plt
 import Lab03_myFunctions as myf
+plt.rcParams.update({'font.size': 16}) # change plot font size
 """
 This file is used to study the period of a relativistic pendulum.
 
@@ -63,6 +64,7 @@ def T_array(x0, N):
     return integral_arr
 
 if __name__ == '__main__':
+    print('Expected Value: ', CLASSICAL_LIM)
     # part a
     x0 = 0.01 # m
     T8, x8, w8, g_arr8 = T(x0, 8) 
@@ -80,6 +82,7 @@ if __name__ == '__main__':
     plt.title('Integrand vs x')
     plt.xlabel('x')
     plt.ylabel('Integrand')
+    plt.grid()
     plt.gcf()
     plt.savefig('Q2b.png', dpi=300, bbox_inches='tight')
     plt.show()
@@ -90,6 +93,7 @@ if __name__ == '__main__':
     plt.xlabel('x')
     plt.ylabel('Weighted integrand')
     plt.title('Weighted integrand vs x')
+    plt.grid()
     plt.gcf()
     plt.savefig('Q2bweight.png', dpi=300, bbox_inches='tight')
     plt.show()
@@ -110,6 +114,7 @@ if __name__ == '__main__':
     plt.xlabel('Initial Amplitude $x_0$')
     plt.ylabel('Period $T$')
     plt.title('Period vs Initial Amplitude')
+    plt.grid()
     plt.gcf()
     plt.savefig('Q2e.png', dpi=300, bbox_inches='tight')
     plt.show()
