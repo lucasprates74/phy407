@@ -17,12 +17,24 @@ def g(x, x0):
     return c * np.sqrt(numerator / denominator)
 
 def T(x0, N):
-    x, w = myf.gaussxw(N)
-    x,w = 0.5*x0*x+0.5*x0,0.5*x0*w
+    x, w = myf.gaussxwab(N, 0, x0)
     
     g_arr = g(x, x0)
     integral = sum(4 * w / g_arr)
     return integral, x, w, g_arr
+
+def T_parte(x0, N):
+    x, w = myf.gaussxw(N)
+    integral_arr = np.zeros(len(x0))
+
+    for i in range(len(x0)):
+        print(i)
+        xi = x0[i]
+        xnew, wnew = 0.5 * xi * x + 0.5 * xi, 0.5* xi * w
+        g_arr = g(xnew, xi)
+        
+        integral_arr[i] = sum(4 * wnew / g_arr)
+    return integral_arr
 
 if __name__ == '__main__':
     # part a
@@ -56,6 +68,7 @@ if __name__ == '__main__':
 
 
     # part e
-    x0 = np.arange(1, 10 * xc)
-    # plt.plot(x0, T(x0, 200), linestyle='none', marker='.')
-    # plt.show()
+    x0 = np.arange(1, 10 * xc, 10 ** 5)
+    
+    plt.plot(x0, T_parte(x0, 200), linestyle='none', marker='.')
+    plt.show()
