@@ -111,11 +111,15 @@ if __name__ == '__main__':
 
     # part c)
     # Position and momentum plot
-    x_values = np.arange(0, 15, 1)
+    x_values = np.arange(0, 16, 1)
     for i in x_values:
-        plt.plot(i, x_uncert(i), color='blue', marker='x', ms=10)
-        plt.plot(i, p_uncert(i), color='red', marker='o')
-        plt.plot(i, x_uncert(i)*p_uncert(i), color='green', marker='s')
+        pos_uncert = x_uncert(i) # Compute position uncertainty
+        mom_uncert = p_uncert(i) # Compute momentum uncertainty
+        print('Position uncertainty, n = {0}:  {1}'.format(i, pos_uncert)) # Print values
+        print('Momentum uncertainty, n = {0}:  {1}'.format(i, mom_uncert)) # Print values
+        plt.plot(i, pos_uncert, color='blue', marker='x', ms=10)
+        plt.plot(i, mom_uncert, color='red', marker='o')
+        plt.plot(i, pos_uncert*mom_uncert, color='green', marker='s')
     plt.plot([], [], color='blue', marker='x', label='$\\Delta X$')
     plt.plot([], [], color='red', marker='o', label='$\\Delta P$')
     plt.plot([], [], color='green', marker='s', label='$\\Delta X\\Delta P$')
