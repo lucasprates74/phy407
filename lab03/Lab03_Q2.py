@@ -100,7 +100,7 @@ if __name__ == '__main__':
 
     # part c
     xc = c / OMEGA # this is the amplitude at which the classical oscillator reaches the speed of light
-
+    print(xc, 'm')
     # part d
     T200 = T(x0, 200)[0]
     err200 = np.abs(T200 - CLASSICAL_LIM)
@@ -110,7 +110,10 @@ if __name__ == '__main__':
     # part e
     x0 = np.arange(1, 10 * xc, 10 ** 6)
     
-    plt.plot(x0, T_array(x0, 200))
+    plt.plot(x0, T_array(x0, 200), label='Period')
+    plt.plot(x0, CLASSICAL_LIM * np.ones(len(x0)), linestyle='--', label='Small Amplitude Limit')
+    plt.plot(x0, 4 * x0 / c, linestyle='--', label='Large Amplitude Limit')
+    plt.legend()
     plt.xlabel('Initial Amplitude $x_0$')
     plt.ylabel('Period $T$')
     plt.title('Period vs Initial Amplitude')
