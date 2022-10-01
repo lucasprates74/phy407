@@ -39,7 +39,7 @@ if __name__ == '__main__':
     plt.legend()
     plt.xlabel('Matrix and Vector size $N$')
     plt.ylabel('Error $\\varepsilon$')
-    plt.title('Comparison of Error Between Different Algorithms across Input Size $N$')
+    plt.title('Error Between Different Algorithms across Input Size $N$')
     plt.savefig('Q1Error.png', dpi=300, bbox_inches='tight')
     plt.clf()
 
@@ -49,5 +49,5 @@ if __name__ == '__main__':
     plt.legend()
     plt.xlabel('Matrix and Vector size $N$')
     plt.ylabel('Time to Run $t$')
-    plt.title('Comparison of Time to Run between Different Algorithms across Input Size $N$')
+    plt.title('Time to Run between Different Algorithms across Input Size $N$')
     plt.savefig('Q1Times.png', dpi=300, bbox_inches='tight')
