@@ -1,5 +1,6 @@
 import numpy as np
-from numpy.linalg import eigvalsh
+from numpy.linalg import eigvalsh, eigh
+import matplotlib.pyplot as plt
 """
 Study the quantum system with potential well of the form V(x)= ax/l within the interval
 [0, l] and infinte potential everywhere else.
@@ -46,7 +47,44 @@ def H(N):
     
     return H_arr
 
+def psi(x, eigenvector):
+    """
+    Generate eigenfunctions for this problem given an eigenvector
+    """
+    # normalize eigenvector
+    eigenvector = eigenvector / np.sqrt(sum(eigenvector ** 2))
+
+    N = len(eigenvector)
+    val = 0
+    for n in range(N):
+        val += eigenvector[n] * np.sin(n * pi * x / l)
+    
+    return val
+
+
+
 if __name__ == '__main__':
     # part c
     print(eigvalsh(H(10)))
+
+    # part d
+    H_arr = H(100)
+    print(eigvalsh(H_arr)[:10])
+
+    # part e
+    eigenvalues, eigenvectors = eigh(H_arr)  # 
     
+    eigenvectors = eigenvectors.transpose()  # 
+
+    x = np.linspace(0, l, 100)  # 
+
+    ground_state, first_excited, second_excited = eigenvectors[0:3]
+
+    wfn0 = psi(x, ground_state)
+    wfn1 = psi(x, first_excited)
+    wfn2 = psi(x, second_excited)
+
+    plt.plot(x, np.abs(wfn0) ** 2)
+    plt.plot(x, np.abs(wfn1) ** 2)
+    plt.plot(x, np.abs(wfn2) ** 2)
+    plt.show()
