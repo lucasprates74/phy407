@@ -95,7 +95,7 @@ if __name__ == '__main__':
     plt.plot(x, pd2, label='2nd Excited')
     plt.legend(loc='upper right')
     plt.xlabel('x')
-    plt.ylabel('Probability Density $|\\psi_n(x)|^2$')
+    plt.ylabel('Probability Density $|\\psi(x)|^2$')
     plt.title('Probaility Density vs x')
     plt.grid()
     plt.gcf().set_size_inches([10,6])
