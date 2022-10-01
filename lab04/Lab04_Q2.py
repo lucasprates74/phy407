@@ -67,11 +67,15 @@ def prob_density(eigenvector):
 
 if __name__ == '__main__':
     # part c
-    print(eigvalsh(H(10)))
+    eigvals10 = eigvalsh(H(10))
 
     # part d
     H_arr = H(100)
-    print(eigvalsh(H_arr)[:10])
+    eigvals100 = eigvalsh(H_arr)[:10]
+    
+    print('Energy Level & N=10 Eigenvalues (eV) & N=100 Eigenvalues (eV)\\\\\\hline')
+    for i in range(10):
+        print('{0} & {1} & {2}\\\\'.format(i, round(eigvals10[i], 3), round(eigvals100[i], 3)))
 
     # part e
     eigenvalues, eigenvectors = eigh(H_arr)
