@@ -84,7 +84,7 @@ def PartialPivot(A_in, v_in):
             x[m] -= A[m, i]*x[i]
     return x
 
-if __name__ == "__main__":
+if __name__ == "__main__": # For the printout check
     A = np.array([[2, 1, 4, 1], [3, 4, -1, -1], [1, -4, 1, 5], [2, -2, 1, 3]], dtype=float)
     v = np.array([-4, 3, 9, 7], dtype=float)
     print('Using A and v from (6.16) from the textbook')

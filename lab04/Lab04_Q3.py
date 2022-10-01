@@ -1,5 +1,10 @@
+"""
+Q3 code. Relaxation and Over-relexation method for function solutions to x=f(x) and Binary search for f(x)=0 were implemented.
+Authors: Sam De Abreu & Lucas Prates 
+"""
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.constants as CON
 
 def relaxation(func, x_i, epsilon, c=1, omega=0):
     """
@@ -16,9 +21,27 @@ def relaxation(func, x_i, epsilon, c=1, omega=0):
         x_i = x
     return x_i, num_iter
 
-def f(x, c):
+def binary_search(f, x_1, x_2, epsilon):
+    """
+    Binary search aglorithm for finding roots of a function (implemented recursively). Only valid for end points x_1 and x_2 such that f(x_1) is a different sign from f(x_2). 
+    """
+    if f(x_1) * f(x_2) > 0: # If function at end points has same sign, terminate
+        return  
+    midpoint = 0.5*(x_1+x_2) 
+    if f(midpoint) * f(x_1) > 0:
+        x_1 = midpoint
+    else:
+        x_2 = midpoint
+    if abs(x_1 - x_2) < epsilon: # Whether answer is within desired accuracy epsilon
+        return 0.5*(x_1+x_2)
+    else: # Continue searching
+        return binary_search(f, x_1, x_2, epsilon)
+
+def f(x, c): # Function used in Exercise 6.10 and 6.11
     return 1-np.exp(-c*x)
 
+def g(x): # Function used in Exercise 6.13
+    return 5*np.exp(-x)+x-5
 
 if __name__== '__main__':
     #Exercise 6.10, part a
@@ -44,3 +67,11 @@ if __name__== '__main__':
     plt.ylabel('Number of iterations')
     plt.title('Number of iterations vs $\\omega$')
     plt.show()
+
+    # Exercise 6.13, part b
+    sol = binary_search(g, 0.5, 6, 1e-6)
+    print("Solution to 5e^(-x) + x - 5 = 0 is x = {0}".format(sol))
+    # part c
+    sun_lambda = 502e-9 # meters (m)
+    b = CON.Planck*CON.speed_of_light/(CON.Boltzmann*sol) # Wien displacement constant (Km)
+    print("Estimation of Sun's temperature: T = {0}K".format(b/sun_lambda))
