@@ -1,6 +1,8 @@
 import numpy as np
 from numpy.linalg import eigvalsh, eigh
 import matplotlib.pyplot as plt
+import Lab04_myFunctions as myf
+plt.rcParams.update({'font.size': 16}) # change plot font size
 """
 Study the quantum system with potential well of the form V(x)= ax/l within the interval
 [0, l] and infinte potential everywhere else.
@@ -19,7 +21,7 @@ e_mass = 9.1094e-31  # kg
 a = 10 * e_charge # Joules
 l = 5e-10  # meters
 
-
+x,w = myf.gaussxwab(200, 0, l) # get integration parameters for later
 
 
 def Hmn(m, n):
@@ -47,20 +49,20 @@ def H(N):
     
     return H_arr
 
-def psi(x, eigenvector):
+def psi(eigenvector):
     """
     Generate eigenfunctions for this problem given an eigenvector
     """
-    # normalize eigenvector
-    eigenvector = eigenvector / np.sqrt(sum(eigenvector ** 2))
-
     N = len(eigenvector)
     val = 0
     for n in range(N):
         val += eigenvector[n] * np.sin(n * pi * x / l)
     
-    return val
+    normalization = np.sqrt(sum(np.abs(val) ** 2 * w))
+    return val / normalization
 
+def prob_density(eigenvector):
+    return np.abs(psi(eigenvector)) ** 2
 
 
 if __name__ == '__main__':
@@ -72,19 +74,26 @@ if __name__ == '__main__':
     print(eigvalsh(H_arr)[:10])
 
     # part e
-    eigenvalues, eigenvectors = eigh(H_arr)  # 
+    eigenvalues, eigenvectors = eigh(H_arr)
     
-    eigenvectors = eigenvectors.transpose()  # 
+    eigenvectors = eigenvectors.transpose()  # transpose eigenvector matrix so the rows are eigenvectors
 
-    x = np.linspace(0, l, 100)  # 
-
+    # get the eigenvectors for the three lowest energy states
     ground_state, first_excited, second_excited = eigenvectors[0:3]
 
-    wfn0 = psi(x, ground_state)
-    wfn1 = psi(x, first_excited)
-    wfn2 = psi(x, second_excited)
+    # generate probability densities for the three lowest energy states
+    pd0 = prob_density(ground_state)
+    pd1 = prob_density(first_excited)
+    pd2 = prob_density(second_excited)
 
-    plt.plot(x, np.abs(wfn0) ** 2)
-    plt.plot(x, np.abs(wfn1) ** 2)
-    plt.plot(x, np.abs(wfn2) ** 2)
+    plt.plot(x, pd0, label='Ground')
+    plt.plot(x, pd1, label='1st Excited')
+    plt.plot(x, pd2, label='2nd Excited')
+    plt.legend(loc='upper right')
+    plt.xlabel('x')
+    plt.ylabel('Probability Density $|\\psi_n(x)|^2$')
+    plt.title('Probaility Density vs x')
+    plt.grid()
+    plt.gcf().set_size_inches([10,6])
+    plt.savefig('Q4.png', dpi=300, bbox_inches='tight')
     plt.show()
