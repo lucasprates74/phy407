@@ -20,14 +20,16 @@ def generate_data():
     method_acc = {'Gauss': [], 'Partial': [], 'LU': []}
     funcs = {'Gauss': sl.GaussElim, 'Partial': sl.PartialPivot, 'LU': np.linalg.solve}
     for n in range(2, N):
+        # Generate random vector v and matrix A
         v = np.random.rand(n)
         A = np.random.rand(n, n)
-        for s in ['Gauss', 'Partial', 'LU']:
+        # Evaluate different methods in time complexity and accuracy
+        for s in ['Gauss', 'Partial', 'LU']: # The three desired methods
             start = time()
-            x = funcs[s](A, v)
+            x = funcs[s](A, v) # Solve Matrix equation using desired method
             end = time()
-            times[s].append(end-start)
-            method_acc[s].append(np.mean(abs(v-np.dot(A, x))))
+            times[s].append(end-start) # Record time
+            method_acc[s].append(np.mean(abs(v-np.dot(A, x)))) # Record error
     return times, method_acc
 
 if __name__ == '__main__':

@@ -59,6 +59,7 @@ def PartialPivot(A_in, v_in):
         for j in range(m, N): # Loop through the N-m elements in the mth col
             if abs(A[j, m]) > initial_div: 
                 index = j # Index to swap rows with
+                initial_div = abs(A[j, m]) # New maximum to beat
         A[m, :], A[index, :] = copy(A[index, :]), copy(A[m, :]) # flip matrix rows
         # Swap vector rows
         temp = v[m]
