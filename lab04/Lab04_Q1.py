@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
     #Plot the time to run
     for s in ['Gauss', 'Partial', 'LU']:
-        plt.semilogy(N_values, method_acc[s], label=s)
+        plt.semilogy(N_values, times[s], label=s)
     plt.legend()
     plt.xlabel('Matrix and Vector size $N$')
     plt.ylabel('Time to Run $t$')
