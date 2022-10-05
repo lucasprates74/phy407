@@ -57,8 +57,12 @@ if __name__== '__main__':
     plt.ylabel('Solution $x$')
     plt.title('Bifurcation Plot of $x=1-e^{-cx}$ With Initial Guess $x_i=0.5$')
     plt.savefig('Q3a.png', dpi=300, bbox_inches='tight')
+    plt.clf()
 
-    # Exercise 6.11
+    # Exercise 6.11 part b
+    num_iter = relaxation(f, 0.5, 1e-6,c=2, omega=0)[1]
+    print('The number of iterations for solving x=1-e^(-2x) up to 1e-6: {0}'.format(num_iter))
+    # Exercise 6.11 part c
     omega = np.arange(0, 1.5, 0.05)
     num_iter = np.zeros(len(omega))
     for i in range(len(omega)):
