@@ -1,3 +1,7 @@
+"""
+Implement important functions used throughout the project.
+Authors: Lucas Prates
+"""
 from numpy import ones,copy,cos,tan,pi,linspace
 
 def gaussxw(N):
