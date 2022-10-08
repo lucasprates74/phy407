@@ -1,22 +1,29 @@
 import numpy as np
 from scipy.constants import speed_of_light as c
+import matplotlib.pyplot as plt
+import Lab05_MyFunctions as myf
 
-SPRING_CONST = 1
-MASS = 1
+# define relavant constants
+MASS = 1 # kg
+SPRING_CON = 12 # N / m
+OMEGA = np.sqrt(SPRING_CON / MASS)
+
+xc = c / OMEGA # this is the amplitude at which the classical oscillator reaches the speed of light
+
 
 def acceleration(x, v):
-    return -(SPRING_CONST / MASS) * x (1 - v ** 2 / c ** 2) ** (3/2)
+    """
+    Function that gives the acceleration of the relativistic spring for a given
+    position and velocity.
+    """
+    return -(SPRING_CON / MASS) * x (1 - v ** 2 / c ** 2) ** (3/2)
 
-def EulerCromer(x0, v0, func, end_time, num_points):
-    dt = end_time / num_points
-    t = np.arange(0, end_time, dt)
-    x, v = np.zeros(num_points), np.zeros(num_points)
+if __name__ == '__main__':
 
-    # set initial conditions
-    x[0], v[0] = x0, v0
+    # part a
+    x0, x1, x2 = 1, xc, 10 * xc
 
-    for i in range(1, num_points):
-        v[i] = func(x[i - 1, v - 1]) * dt + v[i - 1]
-        x[i] = v[i] * dt + x[i - 1]
+    t, x, v = myf.EulerCromer(x0, 0, acceleration, 100, 1000)
 
-    return t, x, v
+    plt.plot(t, x)
+    plt.show()
