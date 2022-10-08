@@ -18,9 +18,38 @@ def acceleration(x, v):
     """
     return -(SPRING_CON / MASS) * x * (1 - v ** 2 / c ** 2) ** (3/2)
 
-def normalized_fft(data):
+def normalized_fft(data, interval_length):
+
     amplitudes = np.abs(np.fft.rfft(data))
-    return amplitudes / max(amplitudes)
+    ang_freq = 2 * np.pi * np.arange(len(amplitudes)) / interval_length
+
+    return ang_freq, amplitudes / max(amplitudes)
+
+def g(x, x0):
+    """
+    Velocity function from differential equation. x0 is the initial amplitude while x
+    is the position array.
+    """
+    numerator = SPRING_CON * (x0 ** 2 - x ** 2) * (2 * MASS * c ** 2 + SPRING_CON * (x0 ** 2 - x ** 2) / 2)
+    denominator = 2 * (MASS * c ** 2 + SPRING_CON * (x0 ** 2 - x ** 2) / 2) ** 2
+
+    return c * np.sqrt(numerator / denominator)
+
+def T(x0, N):
+    """
+    This function gives the period for a selected value x0. N is the number of 
+    sample points in the integral. The integral is estimated using the method
+    of Gaussian Quadratures.
+
+    Returns the value of the integral, the sample points, weights, and the integrand 
+    values.
+    """
+    x, w = myf.gaussxwab(N, 0, x0)  # compute sample points and weighs
+    
+    g_arr = g(x, x0)
+    integral = sum(4 * w / g_arr) # compute integral
+
+    return integral
 
 
 if __name__ == '__main__':
@@ -28,30 +57,66 @@ if __name__ == '__main__':
     # part a
     x0_slow, x0_fast, x0_rel = 1, xc, 10 * xc
     
-    T = 2 * np.pi / OMEGA  # approximate period for a classical oscillator
-    t_slow, x_slow, v_slow = myf.EulerCromer(x0_slow, 0, acceleration, 10 * T, 10 ** 3)
+    Tslow = T(x0_slow, 200)  # approximate period for a classical oscillator
+    end_slow = 10 * Tslow
+    t_slow, x_slow, v_slow = myf.EulerCromer(x0_slow, 0, acceleration, end_slow, 1e-3)
 
     plt.plot(t_slow, x_slow)
+    plt.xlabel('time $t$')
+    plt.ylabel('position $x(t)$')
+    plt.title('Position vs time for initial amplitude 1 meter')
     plt.show()
 
-    T = 2 * np.pi / OMEGA  # approximate period for an oscillator nearing the speed of light
-    t_fast, x_fast, v_fast = myf.EulerCromer(x0_fast, 0, acceleration, 10 * T, 10 ** 5)
+    Tfast = T(x0_fast, 200)   # approximate period for an oscillator nearing the speed of light
+    end_fast = 10 * Tfast
+    t_fast, x_fast, v_fast = myf.EulerCromer(x0_fast, 0, acceleration, end_fast, 1e-5)
 
     plt.plot(t_fast, x_fast)
+    plt.xlabel('time $t$')
+    plt.ylabel('position $x(t)$')
+    plt.title('Position vs time for initial amplitude $x_c$')
     plt.show()
 
-    T = 4 * 10 * xc / c  # approximate period for an oscillator nearing the speed of light
-    t_rel, x_rel, v_rel = myf.EulerCromer(x0_rel, 0, acceleration, 10 * T, 10 ** 6)
+    Trel = T(x0_rel, 200)   # approximate period for an oscillator nearing the speed of light
+    end_rel = 10 * Trel
+    t_rel, x_rel, v_rel = myf.EulerCromer(x0_rel, 0, acceleration, end_rel, 1e-4)
 
     plt.plot(t_rel, x_rel)
+    plt.xlabel('time $t$')
+    plt.ylabel('position $x(t)$')
+    plt.title('Position vs time for initial amplitude $10x_c$')
     plt.show()
 
     #  part b
-    amplitudes_slow = normalized_fft(x_slow)[:100]
-    amplitudes_fast = normalized_fft(x_fast)[:100]
-    amplitudes_rel = normalized_fft(x_rel)[:100]
-    plt.plot(amplitudes_slow, label='1m')
-    plt.plot(amplitudes_fast, label='xc')
-    plt.plot(amplitudes_rel, label='10xc')
+    ang_freq_slow, amplitudes_slow = normalized_fft(x_slow, end_slow)
+    ang_freq_fast, amplitudes_fast = normalized_fft(x_fast, end_fast)
+    ang_freq_rel, amplitudes_rel = normalized_fft(x_rel, end_rel)
+
+    plt.plot(ang_freq_slow, amplitudes_slow, label='1 meter')
+    plt.plot(ang_freq_fast, amplitudes_fast, label='$x_c$')
+    plt.plot(ang_freq_rel, amplitudes_rel, label='$10x_c$')
+    plt.vlines(x=2*np.pi/Tslow, ymin=0, ymax=1, linestyle='--', color='blue')
+    plt.vlines(x=2*np.pi/Tfast, ymin=0, ymax=1, linestyle='--', color='orange')
+    plt.vlines(x=2*np.pi/Trel, ymin=0, ymax=1, linestyle='--', color='green')
+    plt.xlim(0, 6)
+    plt.xlabel('Angular frequency $\\omega$')
+    plt.ylabel('Amplitude')
     plt.legend()
+    plt.title('FFT of position data')
+    plt.show()
+
+
+    #  part d
+    ang_freq_slow, amplitudes_slow = normalized_fft(v_slow, end_slow)
+    ang_freq_fast, amplitudes_fast = normalized_fft(v_fast, end_fast)
+    ang_freq_rel, amplitudes_rel = normalized_fft(v_rel, end_rel)
+
+    plt.plot(ang_freq_slow, amplitudes_slow, label='1 meter')
+    plt.plot(ang_freq_fast, amplitudes_fast, label='$x_c$')
+    plt.plot(ang_freq_rel, amplitudes_rel, label='$10x_c$')
+    plt.xlim(0, 6)
+    plt.xlabel('Angular frequency $\\omega$')
+    plt.ylabel('Amplitude')
+    plt.legend()
+    plt.title('FFT of velocity data')
     plt.show()
