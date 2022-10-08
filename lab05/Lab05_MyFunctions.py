@@ -1,13 +1,15 @@
 import numpy as np
-from scipy.constants import speed_of_light as c
-
-SPRING_CONST = 1
-MASS = 1
-
-def acceleration(x, v):
-    return -(SPRING_CONST / MASS) * x (1 - v ** 2 / c ** 2) ** (3/2)
 
 def EulerCromer(x0, v0, func, end_time, num_points):
+    """
+    Solves the ode system 
+
+    xdot = v
+    vdot = func(x, v)
+
+    given initial conditions x0, v0 for the time range 0 <= t <= end_time using
+    the Euler Cromer methond with num_points samples.
+    """
     dt = end_time / num_points
     t = np.arange(0, end_time, dt)
     x, v = np.zeros(num_points), np.zeros(num_points)
