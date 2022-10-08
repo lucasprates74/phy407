@@ -3,8 +3,12 @@ from scipy.constants import speed_of_light as c
 import matplotlib.pyplot as plt
 import Lab05_MyFunctions as myf
 plt.rcParams.update({'font.size': 16}) # change plot font size
+"""
+Here we continue our study of the relativistic spring by taking the fourier transforms of 
+the spring position datasets for different initial positions.
 
-
+Author: Lucas Prates
+"""
 # define relavant constants
 MASS = 1 # kg
 SPRING_CON = 12 # N / m
@@ -21,7 +25,10 @@ def acceleration(x, v):
     return -(SPRING_CON / MASS) * x * (1 - v ** 2 / c ** 2) ** (3/2)
 
 def normalized_fft(data, interval_length):
-
+    """
+    For a dataset with period interval_length, returns the angular frequencies and normalized
+    amplitudes of the FFT.
+    """
     amplitudes = np.abs(np.fft.rfft(data))
     ang_freq = 2 * np.pi * np.arange(len(amplitudes)) / interval_length
 
@@ -43,8 +50,7 @@ def T(x0, N):
     sample points in the integral. The integral is estimated using the method
     of Gaussian Quadratures.
 
-    Returns the value of the integral, the sample points, weights, and the integrand 
-    values.
+    Returns the value of the integral.
     """
     x, w = myf.gaussxwab(N, 0, x0)  # compute sample points and weighs
     
