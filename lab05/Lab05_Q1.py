@@ -2,6 +2,8 @@ import numpy as np
 from scipy.constants import speed_of_light as c
 import matplotlib.pyplot as plt
 import Lab05_MyFunctions as myf
+plt.rcParams.update({'font.size': 16}) # change plot font size
+
 
 # define relavant constants
 MASS = 1 # kg
