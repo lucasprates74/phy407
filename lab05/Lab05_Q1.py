@@ -16,7 +16,7 @@ def acceleration(x, v):
     Function that gives the acceleration of the relativistic spring for a given
     position and velocity.
     """
-    return -(SPRING_CON / MASS) * x (1 - v ** 2 / c ** 2) ** (3/2)
+    return -(SPRING_CON / MASS) * x * (1 - v ** 2 / c ** 2) ** (3/2)
 
 if __name__ == '__main__':
 

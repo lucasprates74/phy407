@@ -18,7 +18,7 @@ def EulerCromer(x0, v0, func, end_time, num_points):
     x[0], v[0] = x0, v0
 
     for i in range(1, num_points):
-        v[i] = func(x[i - 1, v - 1]) * dt + v[i - 1]
+        v[i] = func(x[i - 1], v[i - 1]) * dt + v[i - 1]
         x[i] = v[i] * dt + x[i - 1]
 
     return t, x, v
