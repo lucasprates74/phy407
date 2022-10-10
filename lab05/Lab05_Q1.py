@@ -50,6 +50,16 @@ def T(x0, N):
     return integral
 
 
+def get_fft(data, period):
+    """
+    For a dataset with period, returns the angular frequencies and normalized
+    amplitudes of the FFT.
+    """
+    amplitudes = np.abs(np.fft.rfft(data))
+    ang_freq = 2 * np.pi * np.arange(len(amplitudes)) / period
+
+    return ang_freq, amplitudes / np.max(amplitudes)
+
 if __name__ == '__main__':
 
     # part a
@@ -86,9 +96,9 @@ if __name__ == '__main__':
     plt.show()
 
     #  part b
-    ang_freq_slow, amplitudes_slow = myf.get_fft(x_slow, end_slow)
-    ang_freq_fast, amplitudes_fast = myf.get_fft(x_fast, end_fast)
-    ang_freq_rel, amplitudes_rel = myf.get_fft(x_rel, end_rel)
+    ang_freq_slow, amplitudes_slow = get_fft(x_slow, end_slow)
+    ang_freq_fast, amplitudes_fast = get_fft(x_fast, end_fast)
+    ang_freq_rel, amplitudes_rel = get_fft(x_rel, end_rel)
 
     plt.plot(ang_freq_slow, amplitudes_slow, label='1 meter')
     plt.plot(ang_freq_fast, amplitudes_fast, label='$x_c$')
@@ -105,9 +115,9 @@ if __name__ == '__main__':
 
 
     #  part d
-    ang_freq_slow, amplitudes_slow = myf.get_fft(v_slow, end_slow)
-    ang_freq_fast, amplitudes_fast = myf.get_fft(v_fast, end_fast)
-    ang_freq_rel, amplitudes_rel = myf.get_fft(v_rel, end_rel)
+    ang_freq_slow, amplitudes_slow = get_fft(v_slow, end_slow)
+    ang_freq_fast, amplitudes_fast = get_fft(v_fast, end_fast)
+    ang_freq_rel, amplitudes_rel = get_fft(v_rel, end_rel)
 
     plt.plot(ang_freq_slow, amplitudes_slow, label='1 meter')
     plt.plot(ang_freq_fast, amplitudes_fast, label='$x_c$')
