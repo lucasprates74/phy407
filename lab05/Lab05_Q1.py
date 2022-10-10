@@ -86,9 +86,9 @@ if __name__ == '__main__':
     plt.show()
 
     #  part b
-    ang_freq_slow, amplitudes_slow = myf.normalized_fft(x_slow, end_slow)
-    ang_freq_fast, amplitudes_fast = myf.normalized_fft(x_fast, end_fast)
-    ang_freq_rel, amplitudes_rel = myf.normalized_fft(x_rel, end_rel)
+    ang_freq_slow, amplitudes_slow = myf.get_fft(x_slow, end_slow)
+    ang_freq_fast, amplitudes_fast = myf.get_fft(x_fast, end_fast)
+    ang_freq_rel, amplitudes_rel = myf.get_fft(x_rel, end_rel)
 
     plt.plot(ang_freq_slow, amplitudes_slow, label='1 meter')
     plt.plot(ang_freq_fast, amplitudes_fast, label='$x_c$')
@@ -105,9 +105,9 @@ if __name__ == '__main__':
 
 
     #  part d
-    ang_freq_slow, amplitudes_slow = myf.normalized_fft(v_slow, end_slow)
-    ang_freq_fast, amplitudes_fast = myf.normalized_fft(v_fast, end_fast)
-    ang_freq_rel, amplitudes_rel = myf.normalized_fft(v_rel, end_rel)
+    ang_freq_slow, amplitudes_slow = myf.get_fft(v_slow, end_slow)
+    ang_freq_fast, amplitudes_fast = myf.get_fft(v_fast, end_fast)
+    ang_freq_rel, amplitudes_rel = myf.get_fft(v_rel, end_rel)
 
     plt.plot(ang_freq_slow, amplitudes_slow, label='1 meter')
     plt.plot(ang_freq_fast, amplitudes_fast, label='$x_c$')

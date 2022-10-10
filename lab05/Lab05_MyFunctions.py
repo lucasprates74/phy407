@@ -25,7 +25,7 @@ def EulerCromer(x0, v0, func, tstop, dt):
 
     return t, x, v
 
-def normalized_fft(data, period):
+def get_fft(data, period, normalized=True):
     """
     For a dataset with period, returns the angular frequencies and normalized
     amplitudes of the FFT.
@@ -33,7 +33,10 @@ def normalized_fft(data, period):
     amplitudes = np.abs(np.fft.rfft(data))
     ang_freq = 2 * np.pi * np.arange(len(amplitudes)) / period
 
-    return ang_freq, amplitudes / np.max(amplitudes)
+    if normalized:
+        return ang_freq, amplitudes / np.max(amplitudes)
+    else:
+        return ang_freq, amplitudes
 
 
 from numpy import ones,copy,cos,tan,pi,linspace

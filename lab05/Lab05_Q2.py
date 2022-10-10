@@ -40,14 +40,14 @@ plt.show()
 def filter_func(freq, amplitudes, cutoff):
 
     cutoff_index = np.argwhere(freq < cutoff).ravel()[-1]
-    print(freq)
+    
     filtered = amplitudes.copy()
     filtered[cutoff_index:] = 0
     return filtered
 
 
 def fourier_filter(channel, name):
-    ang_freq, amplitudes = myf.normalized_fft(channel, time[-1])
+    ang_freq, amplitudes = myf.get_fft(channel, time[-1], normalized=False)
 
     cutoff = 880 # Hz
     filtered = filter_func(ang_freq, amplitudes, 2 * np.pi *cutoff)
@@ -75,7 +75,7 @@ def fourier_filter(channel, name):
     plt.xlabel('Time (sec)')
     plt.tight_layout()
     plt.show()
-
+    
     return filtered_signal
 
 channel_0_out = fourier_filter(channel_0, 0)
