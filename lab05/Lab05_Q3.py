@@ -6,6 +6,7 @@ import numpy as np
 from matplotlib.pyplot import contourf, xlabel, ylabel, title, colorbar
 import matplotlib.pyplot as plt
 import Lab05_MyFunctions as myf
+plt.rcParams.update({'font.size': 16}) # change plot font size
 
 def waveform(A, phi, lamb, m):
     """
