@@ -69,33 +69,25 @@ if __name__ == '__main__':
     end_slow = 10 * Tslow  # set endtime for simulation at 10 periods
     t_slow, x_slow, v_slow = myf.EulerCromer(x0_slow, 0, acceleration, end_slow, 1e-3)
 
-    plt.plot(t_slow, x_slow)
-    plt.xlabel('time $t$')
-    plt.ylabel('position $x(t)$')
-    plt.title('Position vs time for initial amplitude 1 meter')
-    plt.savefig('Q1_1meter', dpi=300, bbox_inches='tight')
-    plt.show()
-
     Tfast = T(x0_fast, 200)   # compute period of oscillator
     end_fast = 10 * Tfast  # set endtime for simulation at 10 periods
     t_fast, x_fast, v_fast = myf.EulerCromer(x0_fast, 0, acceleration, end_fast, 1e-5)
-
-    plt.plot(t_fast, x_fast)
-    plt.xlabel('time $t$')
-    plt.ylabel('position $x(t)$')
-    plt.title('Position vs time for initial amplitude $x_c$')
-    plt.savefig('Q1_xc', dpi=300, bbox_inches='tight')
-    plt.show()
 
     Trel = T(x0_rel, 200)   # compute period of oscillator
     end_rel = 10 * Trel  # set endtime for simulation at 10 periods
     t_rel, x_rel, v_rel = myf.EulerCromer(x0_rel, 0, acceleration, end_rel, 1e-4)
 
-    plt.plot(t_rel, x_rel)
-    plt.xlabel('time $t$')
-    plt.ylabel('position $x(t)$')
-    plt.title('Position vs time for initial amplitude $10x_c$')
-    plt.savefig('Q1_10xc', dpi=300, bbox_inches='tight')
+    figj, axj = plt.subplots(3, 1, figsize=(8,8))
+    plt.suptitle('Position (m) vs Time (s)')
+    axj[0].plot(t_slow, x_slow)
+    axj[0].set_ylabel('$x_0=1$ meter')
+    axj[1].plot(t_fast, x_fast)
+    axj[1].set_ylabel('$x_0=x_c$')
+    axj[2].plot(t_rel, x_rel)
+    axj[2].set_ylabel('$x_0=10x_c$')
+    plt.xlabel('Time (s)')
+    plt.tight_layout()
+    plt.savefig('Q1_waveforms', dpi=300, bbox_inches='tight')
     plt.show()
 
     #  part b
@@ -111,7 +103,7 @@ if __name__ == '__main__':
     plt.vlines(x=2*np.pi/Tfast, ymin=0, ymax=1, linestyle='--', color='orange')
     plt.vlines(x=2*np.pi/Trel, ymin=0, ymax=1, linestyle='--', color='green')
     plt.xlim(0, 6)
-    plt.xlabel('Angular frequency $\\omega$')
+    plt.xlabel('Angular frequency $\\omega$ ($s^{-1}$)')
     plt.ylabel('Amplitude')
     plt.legend()
     plt.title('FFT of position data')
@@ -130,7 +122,7 @@ if __name__ == '__main__':
     plt.plot(ang_freq_fast, amplitudes_fast, label='$x_c$')
     plt.plot(ang_freq_rel, amplitudes_rel, label='$10x_c$')
     plt.xlim(0, 6)
-    plt.xlabel('Angular frequency $\\omega$')
+    plt.xlabel('Angular frequency $\\omega$ ($s^{-1}$)')
     plt.ylabel('Amplitude')
     plt.legend()
     plt.title('FFT of velocity data')
