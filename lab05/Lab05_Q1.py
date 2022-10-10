@@ -24,16 +24,6 @@ def acceleration(x, v):
     """
     return -(SPRING_CON / MASS) * x * (1 - v ** 2 / c ** 2) ** (3/2)
 
-def normalized_fft(data, interval_length):
-    """
-    For a dataset with period interval_length, returns the angular frequencies and normalized
-    amplitudes of the FFT.
-    """
-    amplitudes = np.abs(np.fft.rfft(data))
-    ang_freq = 2 * np.pi * np.arange(len(amplitudes)) / interval_length
-
-    return ang_freq, amplitudes / max(amplitudes)
-
 def g(x, x0):
     """
     Velocity function from differential equation. x0 is the initial amplitude while x
@@ -96,9 +86,9 @@ if __name__ == '__main__':
     plt.show()
 
     #  part b
-    ang_freq_slow, amplitudes_slow = normalized_fft(x_slow, end_slow)
-    ang_freq_fast, amplitudes_fast = normalized_fft(x_fast, end_fast)
-    ang_freq_rel, amplitudes_rel = normalized_fft(x_rel, end_rel)
+    ang_freq_slow, amplitudes_slow = myf.normalized_fft(x_slow, end_slow)
+    ang_freq_fast, amplitudes_fast = myf.normalized_fft(x_fast, end_fast)
+    ang_freq_rel, amplitudes_rel = myf.normalized_fft(x_rel, end_rel)
 
     plt.plot(ang_freq_slow, amplitudes_slow, label='1 meter')
     plt.plot(ang_freq_fast, amplitudes_fast, label='$x_c$')
@@ -115,9 +105,9 @@ if __name__ == '__main__':
 
 
     #  part d
-    ang_freq_slow, amplitudes_slow = normalized_fft(v_slow, end_slow)
-    ang_freq_fast, amplitudes_fast = normalized_fft(v_fast, end_fast)
-    ang_freq_rel, amplitudes_rel = normalized_fft(v_rel, end_rel)
+    ang_freq_slow, amplitudes_slow = myf.normalized_fft(v_slow, end_slow)
+    ang_freq_fast, amplitudes_fast = myf.normalized_fft(v_fast, end_fast)
+    ang_freq_rel, amplitudes_rel = myf.normalized_fft(v_rel, end_rel)
 
     plt.plot(ang_freq_slow, amplitudes_slow, label='1 meter')
     plt.plot(ang_freq_fast, amplitudes_fast, label='$x_c$')
