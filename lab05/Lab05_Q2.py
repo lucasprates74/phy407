@@ -86,4 +86,4 @@ data_out = np.empty(data.shape, dtype = data.dtype)
 # fill data_out
 data_out[:, 0] = channel_0_out
 data_out[:, 1] = channel_1_out
-write('Filtered_GraviteaTime.wav', sample, data.astype(np.int16))
+write('Filtered_GraviteaTime.wav', sample, data_out)
