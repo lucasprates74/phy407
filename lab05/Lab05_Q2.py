@@ -47,16 +47,17 @@ def filter_func(freq, amplitudes, cutoff):
 
 
 def fourier_filter(channel, name):
-    ang_freq, amplitudes = myf.get_fft(channel, time[-1], normalized=False)
+    coefficients = np.fft.rfft(channel)
+    ang_freq = 2 * np.pi * np.arange(len(coefficients)) / 8  
 
     cutoff = 880 # Hz
-    filtered = filter_func(ang_freq, amplitudes, 2 * np.pi *cutoff)
-
+    filtered = filter_func(ang_freq, coefficients, 2 * np.pi *cutoff)
+    
     figj, axj = plt.subplots(2, 1, figsize=(8,8))
     plt.suptitle('GraviteaTime FFT for Channel {}'.format(name))
-    axj[0].plot(ang_freq, amplitudes)
+    axj[0].plot(ang_freq, np.abs(filtered))
     axj[0].set_ylabel('Amplitude')
-    axj[1].plot(ang_freq, filtered)
+    axj[1].plot(ang_freq, np.abs(filtered))
     axj[1].set_ylabel('Filtered Amplitude')
     plt.xlabel('Angular Frequency (s$^{-1}$)')
     plt.tight_layout()
