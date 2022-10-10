@@ -6,7 +6,7 @@ from scipy.io.wavfile import read, write
 import numpy as np
 import matplotlib.pyplot as plt
 import Lab05_MyFunctions as myf
-plt.rcParams.update({'font.size': 16}) # change plot font size
+plt.rcParams.update({'font.size': 19}) # change plot font size
 
 def read_file(name):
     """
@@ -40,7 +40,9 @@ def fourier_filter(channel, name, cutoff=880):
     plt.suptitle('GraviteaTime FFT for Channel {}'.format(name))
     axj[0].plot(ang_freq, np.abs(coefficients))
     axj[0].set_ylabel('Amplitude')
+    axj[0].set_xticks([0, 7e4, 1.4e5])
     axj[1].plot(ang_freq, np.abs(filtered))
+    axj[1].set_xticks([0, 7e4, 1.4e5])
     axj[1].set_ylabel('Filtered Amplitude')
     plt.xlabel('Angular Frequency (s$^{-1}$)')
     plt.tight_layout()
@@ -82,7 +84,7 @@ if __name__ == '__main__':
     
     # part b , plotting original wave forms
     figj, axj = plt.subplots(2, 1, figsize=(8,8))
-    plt.suptitle('GraviteaTime Wave Form')
+    plt.suptitle('GraviteaTime WaveForm for both Channels')
     axj[0].plot(time, channel_0)
     axj[0].set_ylabel('Channel 0 Waveform')
     axj[1].plot(time, channel_1)
