@@ -50,46 +50,60 @@ def T(x0, N):
     return integral
 
 
+def get_fft(data, period):
+    """
+    For a dataset with period, returns the angular frequencies and normalized
+    amplitudes of the FFT.
+    """
+    amplitudes = np.abs(np.fft.rfft(data))
+    ang_freq = 2 * np.pi * np.arange(len(amplitudes)) / period
+
+    return ang_freq, amplitudes / np.max(amplitudes)
+
 if __name__ == '__main__':
 
     # part a
-    x0_slow, x0_fast, x0_rel = 1, xc, 10 * xc
+    x0_slow, x0_fast, x0_rel = 1, xc, 10 * xc  # set the three initial amplitudes
     
-    Tslow = T(x0_slow, 200)  # approximate period for a classical oscillator
-    end_slow = 10 * Tslow
+    Tslow = T(x0_slow, 200)  # compute period of oscillator
+    end_slow = 10 * Tslow  # set endtime for simulation at 10 periods
     t_slow, x_slow, v_slow = myf.EulerCromer(x0_slow, 0, acceleration, end_slow, 1e-3)
 
     plt.plot(t_slow, x_slow)
     plt.xlabel('time $t$')
     plt.ylabel('position $x(t)$')
     plt.title('Position vs time for initial amplitude 1 meter')
+    plt.savefig('Q1_1meter', dpi=300, bbox_inches='tight')
     plt.show()
 
-    Tfast = T(x0_fast, 200)   # approximate period for an oscillator nearing the speed of light
-    end_fast = 10 * Tfast
+    Tfast = T(x0_fast, 200)   # compute period of oscillator
+    end_fast = 10 * Tfast  # set endtime for simulation at 10 periods
     t_fast, x_fast, v_fast = myf.EulerCromer(x0_fast, 0, acceleration, end_fast, 1e-5)
 
     plt.plot(t_fast, x_fast)
     plt.xlabel('time $t$')
     plt.ylabel('position $x(t)$')
     plt.title('Position vs time for initial amplitude $x_c$')
+    plt.savefig('Q1_xc', dpi=300, bbox_inches='tight')
     plt.show()
 
-    Trel = T(x0_rel, 200)   # approximate period for an oscillator nearing the speed of light
-    end_rel = 10 * Trel
+    Trel = T(x0_rel, 200)   # compute period of oscillator
+    end_rel = 10 * Trel  # set endtime for simulation at 10 periods
     t_rel, x_rel, v_rel = myf.EulerCromer(x0_rel, 0, acceleration, end_rel, 1e-4)
 
     plt.plot(t_rel, x_rel)
     plt.xlabel('time $t$')
     plt.ylabel('position $x(t)$')
     plt.title('Position vs time for initial amplitude $10x_c$')
+    plt.savefig('Q1_10xc', dpi=300, bbox_inches='tight')
     plt.show()
 
     #  part b
-    ang_freq_slow, amplitudes_slow = myf.get_fft(x_slow, end_slow)
-    ang_freq_fast, amplitudes_fast = myf.get_fft(x_fast, end_fast)
-    ang_freq_rel, amplitudes_rel = myf.get_fft(x_rel, end_rel)
+    ang_freq_slow, amplitudes_slow = get_fft(x_slow, end_slow)
+    ang_freq_fast, amplitudes_fast = get_fft(x_fast, end_fast)
+    ang_freq_rel, amplitudes_rel = get_fft(x_rel, end_rel)
 
+    # plot position FFT
     plt.plot(ang_freq_slow, amplitudes_slow, label='1 meter')
     plt.plot(ang_freq_fast, amplitudes_fast, label='$x_c$')
     plt.plot(ang_freq_rel, amplitudes_rel, label='$10x_c$')
@@ -101,14 +115,17 @@ if __name__ == '__main__':
     plt.ylabel('Amplitude')
     plt.legend()
     plt.title('FFT of position data')
+    plt.savefig('Q1_positionFFT', dpi=300, bbox_inches='tight')
     plt.show()
 
 
     #  part d
-    ang_freq_slow, amplitudes_slow = myf.get_fft(v_slow, end_slow)
-    ang_freq_fast, amplitudes_fast = myf.get_fft(v_fast, end_fast)
-    ang_freq_rel, amplitudes_rel = myf.get_fft(v_rel, end_rel)
+    ang_freq_slow, amplitudes_slow = get_fft(v_slow, end_slow)
+    ang_freq_fast, amplitudes_fast = get_fft(v_fast, end_fast)
+    ang_freq_rel, amplitudes_rel = get_fft(v_rel, end_rel)
 
+
+    # plot velocity FFT
     plt.plot(ang_freq_slow, amplitudes_slow, label='1 meter')
     plt.plot(ang_freq_fast, amplitudes_fast, label='$x_c$')
     plt.plot(ang_freq_rel, amplitudes_rel, label='$10x_c$')
@@ -117,4 +134,5 @@ if __name__ == '__main__':
     plt.ylabel('Amplitude')
     plt.legend()
     plt.title('FFT of velocity data')
+    plt.savefig('Q1_velocityFFT', dpi=300, bbox_inches='tight')
     plt.show()
