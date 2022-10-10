@@ -31,6 +31,7 @@ def extract_and_plot(Longitude, Times, SLP, m):
     ylabel('days since Jan. 1 2015')
     title('$m={0}$ Fourier component of SLP anomaly data (hPa)'.format(m))
     colorbar()
+    plt.gcf().set_size_inches(10,6)
     plt.savefig('Q3anomaly_m{0}.png'.format(m), dpi=300, bbox_inches='tight')
     plt.clf()
 
