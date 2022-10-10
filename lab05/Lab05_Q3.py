@@ -11,12 +11,12 @@ def extract_and_plot(Longitude, Times, SLP, m):
     A = np.abs(SLP_fft)
     phi = np.arctan2(np.imag(SLP_fft), np.real(SLP_fft))
     waveforms = []
-    for i in range(120):
+    for i in range(len(SLP)):
         waveforms.append(waveform(A[i], phi[i], Longitude, m))
     contourf(Longitude, Times, waveforms)
     xlabel('longitude(degrees)')
     ylabel('days since Jan. 1 2015')
-    title('$m=3$ Fourier component of SLP anomaly data (hPa)')
+    title('$m={0}$ Fourier component of SLP anomaly data (hPa)'.format(m))
     colorbar()
     plt.show()
 
