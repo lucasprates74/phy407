@@ -87,7 +87,7 @@ if __name__ == '__main__':
     axj[2].set_ylabel('$x_0=10x_c$')
     plt.xlabel('Time (s)')
     plt.tight_layout()
-    # plt.savefig('Q1_waveforms', dpi=300, bbox_inches='tight')
+    plt.savefig('Q1_waveforms', dpi=300, bbox_inches='tight')
     plt.show()
 
     #  part b
@@ -107,7 +107,7 @@ if __name__ == '__main__':
     plt.ylabel('Amplitude')
     plt.legend()
     plt.title('FFT of position data')
-    # plt.savefig('Q1_positionFFT', dpi=300, bbox_inches='tight')
+    plt.savefig('Q1_positionFFT', dpi=300, bbox_inches='tight')
     plt.show()
 
 
@@ -126,5 +126,5 @@ if __name__ == '__main__':
     plt.ylabel('Amplitude')
     plt.legend()
     plt.title('FFT of velocity data')
-    # plt.savefig('Q1_velocityFFT', dpi=300, bbox_inches='tight')
+    plt.savefig('Q1_velocityFFT', dpi=300, bbox_inches='tight')
     plt.show()
