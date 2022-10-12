@@ -8,25 +8,16 @@ import matplotlib.pyplot as plt
 import Lab05_MyFunctions as myf
 plt.rcParams.update({'font.size': 16}) # change plot font size
 
-def waveform(A, phi, lamb, m):
-    """
-    The basic waveform of the Fourier decomp. in the longitudinal direction for the SLP. Supplied from the lab handout
-    """
-    return A*np.cos(lamb*m+phi)
-
 def extract_and_plot(Longitude, Times, SLP, m):
     """
     Compute the mth Fourier component of the longitude as a function of time and plot the component in a latitude-time cross section contour plot
     """
-    SLP_fft = np.fft.fft(SLP, axis=1)[:, m] # Compute the Fourier transform in the longitudinal direction. Get the mth coefficient as a function of time
-    A = np.abs(SLP_fft) # Get the amplitude [A=sqrt(real**2+imag**2)]
-    phi = np.arctan2(np.imag(SLP_fft), np.real(SLP_fft)) # Compute the phase
-    waveforms = []
-    # Compute the waveform for time and longitude. Need to be in the form waveform[day][longitude]
-    for i in range(len(SLP)):
-        waveforms.append(waveform(A[i], phi[i], Longitude, m)) 
+    SLP_fft = np.fft.rfft(SLP, axis=1) # Take the Fourier transform in the longitudinal direction
+    SLP_fft[:, :m] = 0 # Set all coefficients before the mth to 0 
+    SLP_fft[:, m+1:] = 0 # Set all coefficients after the mth to 0
+    SLP_comp = np.fft.irfft(SLP_fft, axis=1) # Compute the inverse Fourier transform
     # Plot contours
-    contourf(Longitude, Times, waveforms)
+    contourf(Longitude, Times, SLP_comp)
     xlabel('longitude(degrees)')
     ylabel('days since Jan. 1 2015')
     title('$m={0}$ Fourier component of SLP anomaly data (hPa)'.format(m))
