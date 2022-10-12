@@ -67,15 +67,15 @@ if __name__ == '__main__':
     
     Tslow = T(x0_slow, 200)  # compute period of oscillator
     end_slow = 10 * Tslow  # set endtime for simulation at 10 periods
-    t_slow, x_slow, v_slow = myf.EulerCromer(x0_slow, 0, acceleration, end_slow, 1e-3)
+    t_slow, x_slow, v_slow = myf.EulerCromer(x0_slow, 0, acceleration, end_slow, 2 ** 12)
 
     Tfast = T(x0_fast, 200)   # compute period of oscillator
     end_fast = 10 * Tfast  # set endtime for simulation at 10 periods
-    t_fast, x_fast, v_fast = myf.EulerCromer(x0_fast, 0, acceleration, end_fast, 1e-5)
+    t_fast, x_fast, v_fast = myf.EulerCromer(x0_fast, 0, acceleration, end_fast, 2 ** 20)
 
     Trel = T(x0_rel, 200)   # compute period of oscillator
     end_rel = 10 * Trel  # set endtime for simulation at 10 periods
-    t_rel, x_rel, v_rel = myf.EulerCromer(x0_rel, 0, acceleration, end_rel, 1e-4)
+    t_rel, x_rel, v_rel = myf.EulerCromer(x0_rel, 0, acceleration, end_rel, 2 ** 20)
 
     figj, axj = plt.subplots(3, 1, figsize=(8,8))
     plt.suptitle('Position (m) vs Time (s)')
