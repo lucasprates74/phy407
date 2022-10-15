@@ -14,7 +14,7 @@ def force(r1, r2):
     factor = (24 / dist ** 14) * (2 - dist ** 6)
     fx = (x1-x2) * factor
     fy = (y1-y2) * factor
-    return np.array([fx, fy, -fx, -fy])
+    return np.array([fx, fy])
 
 def tot_force(r, i):
     """
@@ -38,13 +38,16 @@ def solve(r0, v0, tstop, dt=0.01):
     r[:, 0]=r0
     v[:, 0]=v0
 
-    vhalf = v[:, 0] + ( dt / 2 ) * tot_force(r[:, 0], particle_num)
+    for part_num in range(0, DOFs, DIMENSIONS):
+        rpart = r[part_num:part_num+2]
+        vpart = v[part_num:part_num+2]
 
-    for i in range(1, num_steps):
-         for particle_num in range(0, DOFs, DIMENSIONS):
-            r[:, i] = r[:, i-1] + dt * vhalf
-            k = dt * tot_force(r[:, i], particle_num)
-            v[:, i] = vhalf + 0.5 * k
+        vhalf = vpart[0] + ( dt / 2 ) * tot_force(r[:, 0], part_num)
+
+        for i in range(1, num_steps):
+            rpart[:, i] = rpart[:, i-1] + dt * vhalf
+            k = dt * tot_force(r[:, i], part_num)
+            vpart[:, i] = vhalf + 0.5 * k
             vhalf += k
 
     return r, v
