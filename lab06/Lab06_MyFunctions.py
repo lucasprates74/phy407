@@ -26,7 +26,7 @@ def tot_force(r, i):
             tot += force(r1, r2)
     return tot
 
-def solve(r0, v0, tstop, dt=0.01):
+def solve(r0, v0, tstop, dt=0.3):
     DOFs = len(r0)  # get the number of degrees of freedom
     num_steps = int(tstop // dt)
 
@@ -36,21 +36,24 @@ def solve(r0, v0, tstop, dt=0.01):
     r[:, 0]=r0
     v[:, 0]=v0
     vhalf = np.zeros((DOFs, num_steps))
-    for particle_num in range(0, DOFs, DIMENSIONS):
-        start, end = particle_num, particle_num+DIMENSIONS
-        vhalf[start:end, 0] = v[start:end, 0] + ( dt / 2 ) * tot_force(r[:, 0], particle_num)
-    # print(vhalf[:, 0])
+    for n in range(0, DOFs, DIMENSIONS):
+        start, end = n, n+DIMENSIONS
+        vhalf[start:end, 0] = v[start:end, 0] + ( dt / 2 ) * tot_force(r[:, 0], n)
+    
     for i in range(1, num_steps):
-         for particle_num in range(0, DOFs, DIMENSIONS):
-            start, end = particle_num, particle_num+DIMENSIONS
+        # compute the new positions for each particle
+         for n in range(0, DOFs, DIMENSIONS):
+            start, end = n, n + DIMENSIONS
             r[start:end, i] = r[start:end, i-1] + dt * vhalf[start:end, i-1]
 
-            
-         for particle_num in range(0, DOFs, DIMENSIONS):
-            k = dt * tot_force(r[:, i], particle_num)
-            v[start:end, i] = vhalf[start:end, i-1] + 0.5 * k
-            vhalf[start:end, i] = vhalf[start:end, i-1] + k
+        # compute the new velocities and half velocities
+         for n in range(0, DOFs, DIMENSIONS):
+            start, end = n, n + DIMENSIONS
+            k = dt * tot_force(r[:, i], n)
 
+            v[start:end, i] = vhalf[start:end, i-1] + 0.5 * k
+            print(v[start:end, i])
+            vhalf[start:end, i] = vhalf[start:end, i-1] + k
     return r, v
 
 
@@ -59,7 +62,7 @@ v0 = (0,0,0,0)
 
 r, v = solve(r0,v0,1)
 x1, y1, x2, y2 = r
-print(r)
+
 import matplotlib.pyplot as plt
 plt.plot(x1, y1, marker='.', linestyle='none')
 plt.plot(x2, y2, marker='.', linestyle='none')
