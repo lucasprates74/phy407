@@ -26,13 +26,12 @@ def tot_force(r, i):
             tot += force(r1, r2)
     return tot
 
-def solve_N(r0, v0, tstop, dt=0.01):
+def solve_N(r0, v0, num_steps, dt=0.01):
     """
     Given initial conditions r0 = (x1, y1, ... , xN, yN) and v0 for an N
     particle system, solves the system of ODEs using Verlet Algorithm.
     """
     DOFs = len(r0)  # get the number of degrees of freedom
-    num_steps = tstop // dt  # get the number of steps
 
     r = np.zeros((DOFs, num_steps))  # [coordinate][time]
     v = np.zeros((DOFs, num_steps))  # [coordinate][time]
