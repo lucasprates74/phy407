@@ -26,20 +26,28 @@ def tot_force(r, i):
             tot += force(r1, r2)
     return tot
 
-def solve(r0, v0, tstop, dt=0.3):
+def solve(r0, v0, tstop, dt=0.01):
+    """
+    Given initial conditions r0 = (x1, y1, ... , xN, yN) and v0 for an N
+    particle system, solves the system of ODEs using Verlet Algorithm.
+    """
     DOFs = len(r0)  # get the number of degrees of freedom
-    num_steps = int(tstop // dt)
+    num_steps = tstop // dt  # get the number of steps
 
-    r = np.zeros((DOFs, num_steps))
-    v = np.zeros((DOFs, num_steps))
+    r = np.zeros((DOFs, num_steps))  # [coordinate][time]
+    v = np.zeros((DOFs, num_steps))  # [coordinate][time]
+    vhalf = np.zeros((DOFs, num_steps))  # half velocities for verlet algorithm
     
+    # set initial conditions
     r[:, 0]=r0
     v[:, 0]=v0
-    vhalf = np.zeros((DOFs, num_steps))
+
+    # compute initial half velocities
     for n in range(0, DOFs, DIMENSIONS):
         start, end = n, n+DIMENSIONS
         vhalf[start:end, 0] = v[start:end, 0] + ( dt / 2 ) * tot_force(r[:, 0], n)
     
+    # loop for the rest of the timesteps
     for i in range(1, num_steps):
         # compute the new positions for each particle
          for n in range(0, DOFs, DIMENSIONS):
@@ -52,18 +60,8 @@ def solve(r0, v0, tstop, dt=0.3):
             k = dt * tot_force(r[:, i], n)
 
             v[start:end, i] = vhalf[start:end, i-1] + 0.5 * k
-            print(v[start:end, i])
             vhalf[start:end, i] = vhalf[start:end, i-1] + k
+            
     return r, v
 
 
-r0 = (4, 4, 5.2, 4)
-v0 = (0,0,0,0)
-
-r, v = solve(r0,v0,1)
-x1, y1, x2, y2 = r
-
-import matplotlib.pyplot as plt
-plt.plot(x1, y1, marker='.', linestyle='none')
-plt.plot(x2, y2, marker='.', linestyle='none')
-plt.show()
