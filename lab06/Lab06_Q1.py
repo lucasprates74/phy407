@@ -17,23 +17,35 @@ def f(r):
     return np.array([fx1, fy1, fx2, fy2])
 
 def solve(r1, r2, v1, v2, dt=0.01):
-    r = np.zeros((300, 4))
+    r = np.zeros((100, 4))
     r[0][0], r[0][1] = r1
     r[0][2], r[0][3] = r2
-    v = np.zeros((300, 4))
+    v = np.zeros((100, 4))
     v[0][0], v[0][1] = v1
     v[0][2], v[0][3] = v2
-    for i in range(0, len(r)-3): # dt -> 2dt
-        if i == 0:
-            v[1] = v[0]+dt/2*f(r[0])
-        r[i+2] = r[i]+dt*v[i+1]
-        k = dt*f(r[i+2])
-        v[i+2] = v[i+1]+0.5*k
-        v[i+3] = v[i+1]+k
+    v_half = np.zeros((100, 4))
+    v_half[0] = v[0]+dt/2*f(r[0])
+    for i in range(len(r)-1): # dt -> 2dt
+        r[i+1] = r[i]+dt*v_half[i]
+        k = dt*f(r[i+1])
+        v[i+1] = v_half[i]+0.5*k
+        v_half[i+1] = v_half[i]+k
     return r, v
 
 if __name__ == '__main__':
     r1_sol, v1_sol = solve((4, 4), (5.2, 4), (0, 0), (0, 0))
+    for i in range(0, len(r1_sol)):
+        plt.plot(r1_sol[i][0], r1_sol[i][1], marker='o', linestyle='None', color='blue')
+        plt.plot(r1_sol[i][2], r1_sol[i][3], marker='o', linestyle='None', color='red')
+    plt.show()
+
+    r1_sol, v1_sol = solve((4.5, 4), (5.2, 4), (0, 0), (0, 0))
+    for i in range(0, len(r1_sol)):
+        plt.plot(r1_sol[i][0], r1_sol[i][1], marker='o', linestyle='None', color='blue')
+        plt.plot(r1_sol[i][2], r1_sol[i][3], marker='o', linestyle='None', color='red')
+    plt.show()
+
+    r1_sol, v1_sol = solve((2, 3), (3.5, 4.4), (0, 0), (0, 0))
     for i in range(0, len(r1_sol)):
         plt.plot(r1_sol[i][0], r1_sol[i][1], marker='o', linestyle='None', color='blue')
         plt.plot(r1_sol[i][2], r1_sol[i][3], marker='o', linestyle='None', color='red')
