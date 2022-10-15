@@ -26,7 +26,7 @@ def tot_force(r, i):
             tot += force(r1, r2)
     return tot
 
-def solve(r0, v0, tstop, dt=0.01):
+def solve_N(r0, v0, tstop, dt=0.01):
     """
     Given initial conditions r0 = (x1, y1, ... , xN, yN) and v0 for an N
     particle system, solves the system of ODEs using Verlet Algorithm.
@@ -61,7 +61,7 @@ def solve(r0, v0, tstop, dt=0.01):
 
             v[start:end, i] = vhalf[start:end, i-1] + 0.5 * k
             vhalf[start:end, i] = vhalf[start:end, i-1] + k
-            
+
     return r, v
 
 
