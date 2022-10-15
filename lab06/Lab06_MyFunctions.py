@@ -1,11 +1,9 @@
-from ssl import VERIFY_X509_PARTIAL_CHAIN
 import numpy as np
 
 DIMENSIONS = 2
 
 def force(r1, r2): 
     # Return the force on particle 1 at r1 due to particle 2 at r2
-    print(r1)
     x1, y1 = r1
     x2, y2 = r2
 
@@ -14,7 +12,7 @@ def force(r1, r2):
     factor = (24 / dist ** 14) * (2 - dist ** 6)
     fx = (x1-x2) * factor
     fy = (y1-y2) * factor
-    return np.array([fx, fy, -fx, -fy])
+    return np.array([fx, fy])
 
 def tot_force(r, i):
     """
@@ -37,14 +35,32 @@ def solve(r0, v0, tstop, dt=0.01):
     
     r[:, 0]=r0
     v[:, 0]=v0
-
-    vhalf = v[:, 0] + ( dt / 2 ) * tot_force(r[:, 0], particle_num)
-
+    vhalf = np.zeros((DOFs, num_steps))
+    for particle_num in range(0, DOFs, DIMENSIONS):
+        start, end = particle_num, particle_num+DIMENSIONS
+        vhalf[start:end, 0] = v[start:end, 0] + ( dt / 2 ) * tot_force(r[:, 0], particle_num)
+    # print(vhalf[:, 0])
     for i in range(1, num_steps):
          for particle_num in range(0, DOFs, DIMENSIONS):
-            r[:, i] = r[:, i-1] + dt * vhalf
+            start, end = particle_num, particle_num+DIMENSIONS
+            r[start:end, i] = r[start:end, i-1] + dt * vhalf[start:end, i-1]
+
+            
+         for particle_num in range(0, DOFs, DIMENSIONS):
             k = dt * tot_force(r[:, i], particle_num)
-            v[:, i] = vhalf + 0.5 * k
-            vhalf += k
+            v[start:end, i] = vhalf[start:end, i-1] + 0.5 * k
+            vhalf[start:end, i] = vhalf[start:end, i-1] + k
 
     return r, v
+
+
+r0 = (4, 4, 5.2, 4)
+v0 = (0,0,0,0)
+
+r, v = solve(r0,v0,1)
+x1, y1, x2, y2 = r
+print(r)
+import matplotlib.pyplot as plt
+plt.plot(x1, y1, marker='.', linestyle='none')
+plt.plot(x2, y2, marker='.', linestyle='none')
+plt.show()
