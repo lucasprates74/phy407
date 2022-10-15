@@ -9,12 +9,13 @@ def f(r):
     y1 = r[1]
     x2 = r[2]
     y2 = r[3]
-    factor = 2/((x1-x2)**2+(y1-y2)**2)**7-1/((x1-x2)**2+(y1-y2)**2)**4
-    fx1 = 12*(x1-x2)*factor
-    fy1 = 12*(y1-y2)*factor
-    fx2 = 12*(x2-x1)*factor
-    fy2 = 12*(y2-y1)*factor
-    return np.array([fx1, fy1, fx2, fy2])
+    
+    dist = np.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+
+    factor = (24 / dist ** 14) * (2 - dist ** 6)
+    fx = (x1-x2) * factor
+    fy = (y1-y2) * factor
+    return np.array([fx, fy, -fx, -fy])
 
 def solve(r1, r2, v1, v2, dt=0.01):
     r = np.zeros((N, 4))
