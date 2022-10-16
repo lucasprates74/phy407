@@ -12,19 +12,30 @@ y_grid = np.arange(dy/2, Ly, dy)
 xx_grid, yy_grid = np.meshgrid(x_grid, y_grid)
 x_initial = xx_grid.flatten()
 y_initial = yy_grid.flatten()
-print(x_initial)
-print(y_initial)
+
 r0 = np.array([x_initial, y_initial]).transpose().flatten()
-print(r0)
+
 v0 = np.zeros(2*N)
 
 r, v, energy = myf.solve_N(r0, v0, 1000)
 DOFs = len(r)
+fig, ax = plt.subplots()
+
+# create a way to cycle through colours
+color = iter(plt.cm.rainbow(np.linspace(0, 1, DOFs // 2)))
 for i in range(0, DOFs, 2):
+    # get x and y position data for the particle
     x, y = r[i:i+2]
-    plt.plot(x,y, marker='.', linestyle='None')
+    num_points = len(x)
+
+    c= next(color)  # iterate to next colour
+    # plot each data point with increasing opacity
+    for j in range(num_points):
+        plt.plot(x[j], y[j], marker='.', linestyle='None', 
+        markersize=2, color=c, alpha=j/num_points)
 plt.show()
 
+# plot energy
 plt.plot(energy)
 avg = np.mean(energy)
 plt.plot(avg * np.ones(len(energy)), linestyle='--')
