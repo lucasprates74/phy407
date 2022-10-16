@@ -1,6 +1,11 @@
+"""
+Q2 code. Solves and plots the trajectory of N particles interacting via the Lennard-Jones potential.
+Author: Sam De Abreu & Lucas Prates
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 import Lab06_MyFunctions as myf
+plt.rcParams.update({'font.size': 16}) # change plot font size
 
 N = 16
 Lx = 4.0

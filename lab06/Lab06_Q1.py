@@ -1,6 +1,6 @@
 """
 Q1 code. Solves and plots the trajectory of two particles interacting via the Lennard-Jones potential.
-Author: Sam De Abreu
+Author: Sam De Abreu & Lucas Prates
 """
 # Imports
 import numpy as np
