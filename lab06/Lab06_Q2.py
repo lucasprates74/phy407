@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import Lab06_MyFunctions as myf
+plt.rcParams.update({'font.size': 16}) # change plot font size
 
 N = 16
 Lx = 4.0
@@ -14,7 +15,6 @@ x_initial = xx_grid.flatten()
 y_initial = yy_grid.flatten()
 
 r0 = np.array([x_initial, y_initial]).transpose().flatten()
-
 v0 = np.zeros(2*N)
 
 r, v, energy = myf.solve_N(r0, v0, 1000)
@@ -33,12 +33,21 @@ for i in range(0, DOFs, 2):
     for j in range(num_points):
         plt.plot(x[j], y[j], marker='.', linestyle='None', 
         markersize=2, color=c, alpha=j/num_points)
+plt.title('Trajectories for N=16 particles')
+plt.xlabel('$x$')
+plt.ylabel('$y$')
+plt.savefig('16trajectories', dpi=300, bbox_inches='tight')
 plt.show()
 
 # plot energy
-plt.plot(energy)
+plt.plot(energy, label='Total Energy')
 avg = np.mean(energy)
-plt.plot(avg * np.ones(len(energy)), linestyle='--')
-plt.plot(1.01 * avg * np.ones(len(energy)), linestyle='--')
-plt.plot(0.99 * avg * np.ones(len(energy)), linestyle='--')
+plt.plot(avg * np.ones(len(energy)), linestyle='--', label='Mean energy')
+plt.plot(1.01 * avg * np.ones(len(energy)), linestyle='--', color='red', label=r'$\pm$1% of mean')
+plt.plot(0.99 * avg * np.ones(len(energy)), linestyle='--', color='red')
+plt.xlabel('time')
+plt.ylabel('Energy')
+plt.legend()
+plt.title('Energy vs time')
+plt.savefig('energy', dpi=300, bbox_inches='tight')
 plt.show()
