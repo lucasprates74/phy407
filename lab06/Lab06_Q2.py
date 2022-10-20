@@ -1,23 +1,30 @@
+"""
+Q2 code. Solves and plots the trajectory of N particles interacting via the Lennard-Jones potential. Note the actual alogrithms are in MyFunctions.py.
+Author: Sam De Abreu & Lucas Prates
+"""
+# Imports
 import numpy as np
 import matplotlib.pyplot as plt
 import Lab06_MyFunctions as myf
 plt.rcParams.update({'font.size': 16}) # change plot font size
 
-N = 16
-Lx = 4.0
-Ly = 4.0
-dx = Lx/np.sqrt(N)
-dy = Ly/np.sqrt(N)
+N = 16 # Number of particles
+Lx = 4.0 # Horizontal size of grid
+Ly = 4.0 # Vertical size of grid
+dx = Lx/np.sqrt(N) # Resolution in horizontal
+dy = Ly/np.sqrt(N) # Resolution in vertical
+# Create grids
 x_grid = np.arange(dx/2, Lx, dx)
 y_grid = np.arange(dy/2, Ly, dy)
 xx_grid, yy_grid = np.meshgrid(x_grid, y_grid)
 x_initial = xx_grid.flatten()
 y_initial = yy_grid.flatten()
 
-r0 = np.array([x_initial, y_initial]).transpose().flatten()
-v0 = np.zeros(2*N)
+r0 = np.array([x_initial, y_initial]).transpose().flatten() # Position initial conditions using created grids
 
-r, v, energy = myf.solve_N(r0, v0, 1000)
+v0 = np.zeros(2*N) # Velocity initial conditions
+
+r, v, energy = myf.solve_N(r0, v0, 1000) # Solve system for 1000 time steps
 DOFs = len(r)
 fig, ax = plt.subplots()
 

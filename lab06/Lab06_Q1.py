@@ -1,6 +1,6 @@
 """
 Q1 code. Solves and plots the trajectory of two particles interacting via the Lennard-Jones potential.
-Author: Sam De Abreu
+Author: Sam De Abreu & Lucas Prates
 """
 # Imports
 import numpy as np
@@ -59,8 +59,8 @@ if __name__ == '__main__':
             # Plot the trajectory solution
             plt.plot(r1_sol[0][i], r1_sol[1][i], marker='.', linestyle='None', color='blue', alpha=i/N)
             plt.plot(r1_sol[2][i], r1_sol[3][i], marker='.', linestyle='None', color='red', alpha=i/N)
-        plt.xlabel('$x$')
-        plt.ylabel('$y$')
+        plt.xlabel('$x$ (units)')
+        plt.ylabel('$y$ (units)')
         plt.grid()
         plt.title('Trajectory for $N=2$ particles with {0} Initial Conditions'.format({1: '1st', 2: '2nd', 3: '3rd'}[m+1]))
         plt.savefig('Q1b_{0}.png'.format(m+1), dpi=300, bbox_inches='tight')
