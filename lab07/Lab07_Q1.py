@@ -145,7 +145,7 @@ if __name__ == '__main__':
     axs[2].plot(time_array[:, 0][start:], (np.array(xpoints_adapt[start:])**2+np.array(ypoints_adapt[start:])**2)**(0.5))
     axs[2].set_ylabel('$r$ (m)')
     axs[3].plot(time_array[:, 0][start:], time_array[:, 1][start:])
-    axs[3].set_ylabel('Time step $h$ (s/step)')
+    axs[3].set_ylabel('Time step $h$ (s)')
     axs[3].set_xlabel('Time $t$ (s)')
     plt.suptitle('Spatial Coordinates $(x,y)$ & Time Step $h$ vs Time $t$')
     plt.tight_layout()
