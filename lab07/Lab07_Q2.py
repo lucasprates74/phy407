@@ -1,11 +1,21 @@
 import numpy as np
 import scipy.constants as CON 
 import matplotlib.pyplot as plt
+"""
+Solve the boundary value problem for the radial component of the wavefunction of a hydrogen atom.
+Authors: Lucas Prates
+"""
+
+plt.rcParams.update({'font.size': 16}) # change plot font size
 
 a = 5e-11  # m, Bohr Radius
-ev_to_joule = CON.e
+ev_to_joule = CON.e  # Joules / eV
 
-def potential(r, joules=False):
+# set initial conditions
+R0 = 0
+S0 = 1
+
+def potential(r):
     """Return the potential energy of an electron a distance r from a 
     proton in eV."""
 
@@ -20,44 +30,129 @@ def velocity(x, r, ell, E):
     of the system, while E specifies the total energy of the system."""
     R, S = x
     Rdot = S 
-    Sdot = ell * (ell + 1) * R / r ** 2 - 2 * S / r + 2 * CON.e * ev_to_joule * (potential(r)-E) / CON.hbar
+    Sdot = ell * (ell + 1) * R / r ** 2 - 2 * S / r + 2 * CON.electron_mass * ev_to_joule * (potential(r)-E) * R / CON.hbar ** 2
+
     return np.array([Rdot, Sdot])
 
-def solve(ell, E, rinfty, dr):
+
+def energy(n):
+    return -13.6 / n ** 2
+
+
+def solve(ell, E, r, dr):
     """
     Solve for the radial wavefunction for a specific angular momentum and 
-    energy. Return the value of R at rinfty.
+    energy. Return the r and R arrays for plotting.
     """
-    # start integration at one step size since R diverges for r=0
-    rstart = dr 
-    R0 = 0
-    S0 = 1
-    
-    N = (rinfty - rstart) // dr 
-    x= np.zeros((N, 2))
-    x[0, :] = R0, S0
-    r = np.arange(rstart, rinfty, N)
-    for i in np.arange(1, N):
-        k1 = dr * velocity(x[i - 1, :], r[i], ell,E)
-        k2 = dr * velocity(x[i - 1, :] + 0.5 * k1, r[i] + 0.5 * dr)
-        k3 = dr * velocity(x[i - 1, :] + 0.5 * k2, r[i] + 0.5 * dr)
-        k4 = dr * velocity(x[i - 1, :] + k3, r[i] + dr)
-        x[i, :] = x[i - 1, :] + (k1 + 2 * k2 + 2 * k3 + k4) / 6 
-    
-    return x
+    # set initial conditions for array
+    N = len(r)
+    x= np.zeros((2, N))
+    x[:, 0] = R0, S0
 
-def get_E(ell, rinfty, dr, acc):
+    for i in np.arange(1, N):
+        k1 = dr * velocity(x[:, i - 1], r[i - 1], ell, E)
+        k2 = dr * velocity(x[:, i - 1] + 0.5 * k1, r[i - 1] + 0.5 * dr, ell, E)
+        k3 = dr * velocity(x[:, i - 1] + 0.5 * k2, r[i - 1] + 0.5 * dr, ell, E)
+        k4 = dr * velocity(x[:, i - 1] + k3, r[i - 1] + dr, ell, E)
+        x[:, i] = x[:, i - 1] + (k1 + 2 * k2 + 2 * k3 + k4) / 6 
+    
+    # get R data from array
+    R = x[0]
+    return R
+
+
+def normalize(r, R, dr):
+    """Integrate probability density using trapezoid rule, then return the 
+    R normalized R array."""
+    # get probability density
+    density =  r ** 2 * np.abs(R) ** 2
+
+    # trapezoid rule
+    normalization = (np.sum(density) + 0.5 * (density[-1] - density[0])) * dr
+    
+    return R / np.sqrt(normalization)
+
+
+def solve_BVP(ell, n, acc=1e-3, dr = 0.002 * a, rinfty = 20 * a, plot = False):
     """Use the secant method to find the energy E of the wavefunction R 
-    which gives R(dr)=R(rinfty)=0 to an accuracy of acc""" 
-    E1 = - 14  # eV
-    E2 = 0  # eV 
+    which gives R(dr)=R(rinfty)=0 to an accuracy of acc. 
+    
+    ell: angular momentum quantum number
+    n: energy level
+    acc: target accuracy of secant method
+    dr: RK4 step size
+    rinfty: right bound
+    """
+
+    # set bounds for RK4 method and stepsize 
+    rstart = dr 
+
+    # generate r array
+    r = np.arange(rstart, rinfty, dr)
+
+    # set a finite upper bound for plotting and normalization due to divergence issues
+    N = len(r)
+    finite_bound = N // 2  
+ 
+    E1 = - 15 / n ** 2  # eV
+    E2 = -13 / n ** 2  # eV 
 
     # get last value of R in solution
-    R2 = solve(ell, E2, rinfty, dr)[-1, 0]
-
-    R2 = solve(E1)
-    while abs(E1-E2)>acc:
-        R1, R2 = R2, solve(E2)[-1, 0]
+    R2 = solve(ell, E1, r, dr)[-1]
+    
+    while abs(E1-E2) > acc:
+        R = solve(ell, E2, r, dr)
+        R1, R2 = R2, R[-1]
         E1, E2 = E2, E2 - R2 * (E2-E1) / (R2-R1)
+    
+
+    if plot == True:
+        R = normalize(r[:finite_bound], R[:finite_bound], dr)
+        plt.plot(r[:finite_bound]/ a, R, label='$n$={0} and $\\ell$={1}'.format(n, ell))
 
     return E2
+
+
+if __name__ == '__main__':
+    qnums = [(0,1), (0, 2), (1, 2)]
+
+    
+    dr, rinfty, acc = (0.002 * a, 20 * a, 1e-3)
+    
+    # generate latex tables for b
+    for qnum in qnums:
+        ell, n = qnum
+        
+        expected = round(energy(n), 6)  # get expceted energy
+
+        print('Modified parameter & Energy($eV$) & Error($eV$) & Fractional Error\\\\\\hline')
+        E = round(solve_BVP(ell, n), 6)  # solve the boundary value problem
+        err = round(abs(E - expected), 6)
+        frac_err = round(err / abs(expected), 6)
+        print('None & ', E, ' & ', err, ' & ', frac_err, '\\\\\\hline')
+
+        E = round(solve_BVP(ell, n, dr=dr/2), 6)  # solve the boundary value problem
+        err = round(abs(E - expected), 6)
+        frac_err = round(err / abs(expected), 6)
+        print('$h/2$ & ', E, ' & ', err, ' & ', frac_err, '\\\\\\hline')
+
+        E = round(solve_BVP(ell, n, rinfty=2*rinfty), 6)  # solve the boundary value problem
+        err = round(abs(E - expected), 6)
+        frac_err = round(err / abs(expected), 6)
+        print('$2b$ & ', E, ' & ', err, ' & ', frac_err, '\\\\\\hline')
+
+        E = round(solve_BVP(ell, n, acc=acc/10), 6)  # solve the boundary value problem
+        err = round(abs(E - expected), 6)
+        frac_err = round(err / abs(expected), 6)
+        print('acc/10 & ', E, ' & ', err, ' & ', frac_err, '\\\\\\hline')
+
+        E = solve_BVP(ell, n, dr=dr/4, plot=True)
+        print(E)
+
+
+    plt.title('Radial Wavefunction')
+    plt.legend()
+    plt.xlabel('$r / a$')
+    plt.ylabel('$R(r)$')
+    plt.savefig('Q2', dpi=300, bbox_inches='tight')
+    plt.show()
