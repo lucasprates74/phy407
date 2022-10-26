@@ -12,8 +12,8 @@ from time import time
 ftsz = 16 # Font size
 font = {'size': ftsz}  
 rc('font', **font) # Change font size
-a = 0.0 # The initial time for integration
-b = 10.0 # The final time for integration
+a = 0.0 # The initial time for integration (s)
+b = 10.0 # The final time for integration (s)
 
 def rhs(r):
     """ The right-hand-side of the equations
@@ -104,7 +104,7 @@ def RK4_adaptive(h_i, delta):
             t += 2*h
         # Compute new step size h
         factor = rho**(1/4)
-        if factor > 2:
+        if factor > 2: # Cap the increase of rho by a factor of 2
             factor = 2
         h *= factor
     end = time()
@@ -119,13 +119,12 @@ if __name__ == '__main__':
     plt.figure()
     plt.plot(xpoints, ypoints, ':', label='RK4')
     plt.plot(xpoints_adapt, ypoints_adapt, ':', label='Adaptive RK4')
-    plt.xlabel("$x$")
-    plt.ylabel("$y$")
+    plt.xlabel("$x$ (m)")
+    plt.ylabel("$y$ (m)")
     plt.legend(prop={'size': 11})
     plt.title('Trajectory of a ball bearing around a space rod', fontsize=ftsz)
     plt.axis('equal')
     plt.grid()
-    plt.savefig('Garbage.png', dpi=150)
     plt.savefig('Q1a.png', dpi=300, bbox_inches='tight')
     plt.clf()
 
@@ -145,7 +144,7 @@ if __name__ == '__main__':
     axs[2].plot(time_array[:, 0][start:], (np.array(xpoints_adapt[start:])**2+np.array(ypoints_adapt[start:])**2)**(0.5))
     axs[2].set_ylabel('$r$ (m)')
     axs[3].plot(time_array[:, 0][start:], time_array[:, 1][start:])
-    axs[3].set_ylabel('Time step $h$ (s)')
+    axs[3].set_ylabel('$h$ (s)')
     axs[3].set_xlabel('Time $t$ (s)')
     plt.suptitle('Spatial Coordinates $(x,y)$ & Time Step $h$ vs Time $t$')
     plt.tight_layout()
