@@ -104,7 +104,7 @@ def RK4_adaptive(h_i, delta):
             t += 2*h
         # Compute new step size h
         factor = rho**(1/4)
-        if factor > 2:
+        if factor > 2: # Cap the increase of rho by a factor of 2
             factor = 2
         h *= factor
     end = time()
@@ -119,13 +119,12 @@ if __name__ == '__main__':
     plt.figure()
     plt.plot(xpoints, ypoints, ':', label='RK4')
     plt.plot(xpoints_adapt, ypoints_adapt, ':', label='Adaptive RK4')
-    plt.xlabel("$x$")
-    plt.ylabel("$y$")
+    plt.xlabel("$x$ (m)")
+    plt.ylabel("$y$ (m)")
     plt.legend(prop={'size': 11})
     plt.title('Trajectory of a ball bearing around a space rod', fontsize=ftsz)
     plt.axis('equal')
     plt.grid()
-    plt.savefig('Garbage.png', dpi=150)
     plt.savefig('Q1a.png', dpi=300, bbox_inches='tight')
     plt.clf()
 
@@ -139,13 +138,13 @@ if __name__ == '__main__':
     start = 5
     fig, axs = plt.subplots(4, 1, figsize=(8,8))
     axs[0].plot(time_array[:, 0][start:], xpoints_adapt[start:])
-    axs[0].set_ylabel('$x$')
+    axs[0].set_ylabel('$x$ (m)')
     axs[1].plot(time_array[:, 0][start:], ypoints_adapt[start:])
-    axs[1].set_ylabel('$y$')
+    axs[1].set_ylabel('$y$ (m)')
     axs[2].plot(time_array[:, 0][start:], (np.array(xpoints_adapt[start:])**2+np.array(ypoints_adapt[start:])**2)**(0.5))
-    axs[2].set_ylabel('$r$')
+    axs[2].set_ylabel('$r$ (m)')
     axs[3].plot(time_array[:, 0][start:], time_array[:, 1][start:])
-    axs[3].set_ylabel('Time step $h$')
+    axs[3].set_ylabel('$h$ (s)')
     axs[3].set_xlabel('Time $t$ (s)')
     plt.suptitle('Spatial Coordinates $(x,y)$ & Time Step $h$ vs Time $t$')
     plt.tight_layout()
