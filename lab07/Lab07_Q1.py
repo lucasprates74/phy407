@@ -12,8 +12,8 @@ from time import time
 ftsz = 16 # Font size
 font = {'size': ftsz}  
 rc('font', **font) # Change font size
-a = 0.0 # The initial time for integration
-b = 10.0 # The final time for integration
+a = 0.0 # The initial time for integration (s)
+b = 10.0 # The final time for integration (s)
 
 def rhs(r):
     """ The right-hand-side of the equations
