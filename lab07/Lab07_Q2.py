@@ -67,7 +67,7 @@ def normalize(r, R, dr):
     """Integrate probability density using trapezoid rule, then return the 
     R normalized R array."""
     # get probability density
-    density =  r ** 2 * np.abs(R) ** 2
+    density =  np.abs(R) ** 2
 
     # trapezoid rule
     normalization = (np.sum(density) + 0.5 * (density[-1] - density[0])) * dr
