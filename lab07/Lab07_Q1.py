@@ -114,11 +114,10 @@ if __name__ == '__main__':
     # Solve the system with RK4 and adaptive RK4
     xpoints, ypoints, runtime = RK4(h=1e-3) 
     xpoints_adapt, ypoints_adapt, runtime_adapt, time_steps = RK4_adaptive(h_i=1e-2, delta=1e-6)
-
     # part a
     plt.figure()
-    plt.plot(xpoints, ypoints, ':', label='RK4')
-    plt.plot(xpoints_adapt, ypoints_adapt, ':', label='Adaptive RK4')
+    plt.plot(xpoints, ypoints, ':', label='RK4', ms=0.1)
+    plt.plot(xpoints_adapt, ypoints_adapt, '.', label='Adaptive RK4', ms=4)
     plt.xlabel("$x$ (m)")
     plt.ylabel("$y$ (m)")
     plt.legend(prop={'size': 11})
