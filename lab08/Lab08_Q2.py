@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from pylab import clf, plot, xlim, ylim, show, pause, draw
 plt.rcParams.update({'font.size': 16}) # change plot font size
 
 L = 1 # Domain length [m]
@@ -59,3 +60,17 @@ if __name__ == '__main__':
         plt.grid()
         plt.savefig('Lab08_Q2b_t{0}.png'.format(t), dpi=300, bbox_inches='tight')
         plt.clf()
+    
+    for n in range(0, N):
+        clf()
+        plot(x_grid, np.ones(len(x_grid))*H, linestyle='dashed', color='black')
+        plot(x_grid, np.zeros(len(x_grid)), color='black')
+        plot(x_grid, eta[n])
+        ylim(0, 0.015)
+        xlim(0, L)
+        #ylabel('$\\eta(x, t=4$s$)$ (m)')
+        #plt.xlabel('$x$ (m)')
+        #plt.title('$\\eta(x,t)$ Evaluated at $t={0}$s'.format(t))
+        #plt.grid()
+        draw()
+        pause(0.01)
