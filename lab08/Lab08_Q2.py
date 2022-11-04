@@ -22,7 +22,6 @@ def eta_i(x,t=0):
     A = 0.002
     mu = 0.5
     sigma = 0.05
-    exp_term = A*np.exp(-(x-mu)**2/sigma**2)
     return H+A*np.exp(-(x-mu)**2/sigma**2)-np.average(A*np.exp(-(x_grid-mu)**2/sigma**2))
 
 def solve_FTCS():
@@ -31,7 +30,7 @@ def solve_FTCS():
     for n in range(-1, N-1):
         for j in range(J):
             if n == -1: # t = 0
-                u[n+1][j] = 0
+                u[n+1][j] = u_i(x_grid[j])
                 eta[n+1][j] = eta_i(x_grid[j])
             else:
                 if j == 0: # BC: To the left (x=0)
@@ -44,6 +43,17 @@ def solve_FTCS():
                     u[n+1][j] = u[n][j] - Delta_t/(2*Delta_x) * (u[n][j] * (u[n][j+1] - u[n][j-1]) + g * (eta[n][j+1] - eta[n][j-1]))
                     eta[n+1][j] = eta[n][j] - Delta_t/(2*Delta_x) * (eta[n][j] * (u[n][j+1] - u[n][j-1]) + u[n][j] * (eta[n][j+1] - eta[n][j-1]))
     return u, eta
+
+def anim(eta):
+    for n in range(0, N):
+        clf()
+        plot(x_grid, np.ones(len(x_grid))*H, linestyle='dashed', color='black')
+        plot(x_grid, np.zeros(len(x_grid)), color='black')
+        plot(x_grid, eta[n])
+        ylim(0, 0.015)
+        xlim(0, L)
+        draw()
+        pause(0.01)
 
 if __name__ == '__main__':
     u, eta = solve_FTCS()
@@ -61,16 +71,6 @@ if __name__ == '__main__':
         plt.savefig('Lab08_Q2b_t{0}.png'.format(t), dpi=300, bbox_inches='tight')
         plt.clf()
     
-    for n in range(0, N):
-        clf()
-        plot(x_grid, np.ones(len(x_grid))*H, linestyle='dashed', color='black')
-        plot(x_grid, np.zeros(len(x_grid)), color='black')
-        plot(x_grid, eta[n])
-        ylim(0, 0.015)
-        xlim(0, L)
-        #ylabel('$\\eta(x, t=4$s$)$ (m)')
-        #plt.xlabel('$x$ (m)')
-        #plt.title('$\\eta(x,t)$ Evaluated at $t={0}$s'.format(t))
-        #plt.grid()
-        draw()
-        pause(0.01)
+    anim(eta)
+    
+    
