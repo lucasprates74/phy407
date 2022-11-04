@@ -80,12 +80,13 @@ if __name__ == '__main__':
     times_ind = [0, int(1/Delta_t), int(4/Delta_t)]
     # Plot the solutions
     for t_ind in times_ind:
-        plt.plot(x_grid, np.ones(len(x_grid))*H, linestyle='dashed', color='black')
-        plt.plot(x_grid, np.zeros(len(x_grid)), color='black')
-        plt.plot(x_grid, eta[t_ind])
+        plt.plot(x_grid, np.ones(len(x_grid))*H, linestyle='dashed', color='black', label='$\\eta_b$')
+        plt.plot(x_grid, np.zeros(len(x_grid)), color='black', label='$H$')
+        plt.plot(x_grid, eta[t_ind], label='$\\eta(x, t={0}$s$)$'.format(t_ind*Delta_t))
         plt.ylim(0, plt.ylim()[1]+H/8)
         plt.xlim(0, L)
-        plt.ylabel('$\\eta(x, t={0}$s$)$ (m)'.format(t_ind*Delta_t))
+        plt.legend()
+        plt.ylabel('Altitude $z$ (m)')
         plt.xlabel('$x$ (m)')
         plt.title('$\\eta(x,t)$ Evaluated at $t={0}$s'.format(t_ind*Delta_t))
         plt.grid()
