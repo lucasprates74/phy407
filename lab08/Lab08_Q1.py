@@ -47,7 +47,7 @@ def Gauss_Seidel(omega=0):
     return V
 if __name__ == '__main__':
 
-    i = 1
+    i = 0
     for omega in [0, 0.1, 0.5]:
         V = Gauss_Seidel(omega=omega)  # solve laplace equation
         print('done')
