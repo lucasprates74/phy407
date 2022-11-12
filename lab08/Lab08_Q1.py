@@ -47,17 +47,19 @@ def Gauss_Seidel(omega=0):
     return V
 if __name__ == '__main__':
 
-    
-    # V = Gauss_Seidel()    # 1:24 minutes to run
-    # V = Gauss_Seidel(omega=0.1)   # 1:12 minutes to run
-    V = Gauss_Seidel(omega=0.5)     # 42 seconds to run
+    i = 1
+    for omega in [0, 0.1, 0.5]:
+        V = Gauss_Seidel(omega=omega)  # solve laplace equation
+        print('done')
+        # get position grid
+        i+=1
+        x, y = np.linspace(0, L, N), np.linspace(0, L, N)
+        plt.contourf(x / L, y / L, V)
+        plt.xlabel("$x/\\ell$")
+        plt.ylabel("$y/\\ell$")
+        plt.title("Electric Potential (V) with $\\omega$={}".format(omega))
+        plt.colorbar()
+        plt.savefig("Q1_plot{}".format(i), dpi=300, bbox_inches='tight')
+        plt.show()
 
-    # get position grid
-    x, y = np.linspace(0, L, N), np.linspace(0, L, N)
-    plt.contourf(x / L, y / L, V)
-    plt.xlabel("$x/\\ell$")
-    plt.ylabel("$y/\\ell$")
-    plt.title("Electric Potential (V)")
-    plt.colorbar()
-    plt.savefig("Q1", dpi=300, bbox_inches='tight')
-    plt.show()
+        # 0 took 48 seconds, 0.1 took 44 seconds, 0.5 took 26 seconds
