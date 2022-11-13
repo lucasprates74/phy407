@@ -54,7 +54,7 @@ if __name__ == '__main__':
         # get position grid
         i+=1
         x, y = np.linspace(0, L, N), np.linspace(0, L, N)
-        plt.contourf(x / L, y / L, V)
+        plt.contourf(x / L, y / L, V, 150)
         plt.xlabel("$x/\\ell$")
         plt.ylabel("$y/\\ell$")
         plt.title("Electric Potential (V) with $\\omega$={}".format(omega))
