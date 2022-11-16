@@ -17,7 +17,7 @@ N = 3000 # Number of time steps
 N_int = 300 # Number of steps to use in integration
 tau = 1e-18 # Time step [s]
 a = L/P # Spatial cell spacing [m]
-T = tau*N
+T = tau*N # Total runtime [s]
 
 # Functions
 def normalize(f):
@@ -48,7 +48,7 @@ def psi_i(x):
 
 def V(x):
     """
-    The potential. We use a one-dimensional square well potential with it being zero in [-L/2, L/2] and inf elsewhere.
+    The potential. We use a one-dimensional square well potential with it being zero in (-L/2, L/2) and inf elsewhere.
     """
     if type(x) is np.ndarray: # Check if input is an array
         temp = []
@@ -62,7 +62,7 @@ def V(x):
         if -L/2 < x < L/2:
             return 0
         else:
-            return 1e64 # A really big number to represent inf
+            return 1e64 # A really big number to represent inf (never used, just for show)
 
 def build_H():
     """
@@ -90,7 +90,7 @@ def solve_system():
     psi[0] = psi_i(x)
     # Algorithm
     for n in range(N-1):
-        # We compute psi^(n+1) = L^(-1) R psi^(n) instead of solving L psi^(n+1) = R psi^(n) since L is constant in time, so this is more efficient
+        # We compute psi^(n+1) = L^(-1) R psi^(n) instead of solving L psi^(n+1) = R psi^(n) since L is constant in time (can be inverted outside of loop), so this is more efficient
         psi[n+1] = np.matmul(L_mat_inv, np.matmul(R_mat, psi[n])) # psi^(n+1) = L^(-1) R psi^(n)
     return psi
 
@@ -123,7 +123,7 @@ def compute_energy(psi):
     H_d = build_H()
     energy = []
     for n in range(len(psi)):
-        # Note: psi* H_d psi is a scalar value without any spatial dependence, making it constant with respect to integration and hence a trivial computation (VERIFY)
+        # Note: psi* H_d psi is a scalar value without any spatial dependence (since H_d has no spatial dependence), making it constant with respect to integration and hence a trivial computation (VERIFY)
         f = np.matmul(np.matmul(np.conj(psi[n]), H_d), psi[n]) 
         energy.append(f*L)
     return np.real(energy) # To ensure solution is entirely real (imag part is ~0 anyways)
