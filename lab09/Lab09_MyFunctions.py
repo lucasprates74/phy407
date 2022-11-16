@@ -122,6 +122,7 @@ def idCSt2(b):
         f[:, j] = dcst.dct(a[:, j])
     return f
 
+# Integration methods
 def gaussxw(N):
     # Initial approximation to roots of the Legendre polynomial
     a = linspace(3,4*N-1,N)/(4*N+2)
