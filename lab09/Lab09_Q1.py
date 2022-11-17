@@ -124,7 +124,7 @@ def compute_energy(psi):
     energy = []
     for n in range(len(psi)):
         f = np.matmul(np.matmul(np.conj(psi[n]), H_d), psi[n]) 
-        energy.append(f)
+        energy.append(a*f)
     return np.real(energy) # To ensure solution is entirely real (imag part is ~0 anyways)
 
 def compute_norm(psi):
@@ -170,9 +170,8 @@ if __name__ == '__main__':
     # Part c
     # Energy
     energy = compute_energy(psi)
-    print(energy)
     plt.plot(time/T, energy)
-    plt.ylim(0, 1e-5)
+    plt.ylim(0, 1e-16)
     plt.xlabel('$t/T$')
     plt.ylabel('$E(t)$ (J)')
     plt.grid()
