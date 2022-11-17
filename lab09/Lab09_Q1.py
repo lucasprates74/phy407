@@ -123,9 +123,8 @@ def compute_energy(psi):
     H_d = build_H()
     energy = []
     for n in range(len(psi)):
-        # Note: psi* H_d psi is a scalar value without any spatial dependence (since H_d has no spatial dependence), making it constant with respect to integration and hence a trivial computation (VERIFY)
         f = np.matmul(np.matmul(np.conj(psi[n]), H_d), psi[n]) 
-        energy.append(f*L)
+        energy.append(f)
     return np.real(energy) # To ensure solution is entirely real (imag part is ~0 anyways)
 
 def compute_norm(psi):
@@ -171,8 +170,9 @@ if __name__ == '__main__':
     # Part c
     # Energy
     energy = compute_energy(psi)
+    print(energy)
     plt.plot(time/T, energy)
-    plt.ylim(0, 1e-13)
+    plt.ylim(0, 1e-5)
     plt.xlabel('$t/T$')
     plt.ylabel('$E(t)$ (J)')
     plt.grid()
