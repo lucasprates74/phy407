@@ -50,9 +50,9 @@ while anchored[centre_point, centre_point] != 1: # While there is no anchored pa
     anchored[particle_position[0], particle_position[1]] = 1 # Anchor current particle and then start new at the center again
 
 # Plotting
-plt.imshow(anchored, origin='lower', extent=(0, Lp, 0, Lp))
-plt.xlabel('$x$ (units)')
-plt.ylabel('$y$ (units)')
+plt.imshow(anchored, origin='lower', extent=(0, 1, 0, 1))
+plt.xlabel('$x/L$')
+plt.ylabel('$y/L$')
 plt.title('Final Position of all Anchored Particles')
 plt.savefig('Q1b.png', dpi=300, bbox_inches='tight')
 plt.clf()
