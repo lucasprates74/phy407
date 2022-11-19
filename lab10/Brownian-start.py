@@ -17,24 +17,24 @@ def nextmove(x, y):
     direction = np.random.randint(0, 4) 
 
     if direction == 0:  # move up
-        if y < Lp: # If outside above
+        if y < Lp: 
             y += 1
-        else:
+        else: # If outside above
             return nextmove(x, y)
     elif direction == 1:  # move down
-        if y > 0: # If outside below
+        if y > 0: 
             y -= 1
-        else:
+        else: # If outside below
             return nextmove(x, y)
     elif direction == 2:  # move right
-        if x < Lp: # If outside on the right side
+        if x < Lp: 
             x += 1
-        else:
+        else: # If outside on the right side
             return nextmove(x, y)
     elif direction == 3:  # move left
-        if x > 0: # If outside on the left side
+        if x > 0: 
             x -= 1
-        else:
+        else: # If outside on the left side
             return nextmove(x, y)
     else:
         print("error: direction isn't 0-3")
