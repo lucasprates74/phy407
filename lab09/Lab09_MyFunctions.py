@@ -33,13 +33,13 @@ def idSSt2(b):
     
     # Take inverse transform along y
     for i in range(M):
-        # iDXT b[i,:] and set as a[i,:]
-        a[i, :] = dcst.dst(b[i, :])
+        # iDST b[i,:] and set as a[i,:]
+        a[i, :] = dcst.idst(b[i, :])
 
     # Take inverse transform along x
     for j in range(N):
-        # iDXT a[:,j] and set as f[:,j]
-        f[:, j] = dcst.dst(a[:, j])
+        # iDST a[:,j] and set as f[:,j]
+        f[:, j] = dcst.idst(a[:, j])
     return f
 
 def dSCt2(f):
@@ -58,7 +58,7 @@ def dSCt2(f):
 
     # Take transform along y
     for i in range(M):
-        # DST a[i, :] and set as b[i, :]
+        # DCT a[i, :] and set as b[i, :]
         b[i, :] = dcst.dct(a[i, :])
     return b
 
@@ -73,13 +73,13 @@ def idSCt2(b):
     
     # Take inverse transform along y
     for i in range(M):
-        # iDXT b[i,:] and set as a[i,:]
-        a[i, :] = dcst.dct(b[i, :])
+        # iDCT b[i,:] and set as a[i,:]
+        a[i, :] = dcst.idct(b[i, :])
 
     # Take inverse transform along x
     for j in range(N):
-        # iDXT a[:,j] and set as f[:,j]
-        f[:, j] = dcst.dct(a[:, j])
+        # iDST a[:,j] and set as f[:,j]
+        f[:, j] = dcst.idst(a[:, j])
     return f
 
 def dCSt2(f):
@@ -93,7 +93,7 @@ def dCSt2(f):
 
     # Take transform along x
     for j in range(N):
-        # DST f[:, j] and set as a[:, j]
+        # DCT f[:, j] and set as a[:, j]
         a[:, j] = dcst.dct(f[:, j])
 
     # Take transform along y
@@ -114,12 +114,12 @@ def idCSt2(b):
     # Take inverse transform along y
     for i in range(M):
         # iDXT b[i,:] and set as a[i,:]
-        a[i, :] = dcst.dst(b[i, :])
+        a[i, :] = dcst.idst(b[i, :])
 
     # Take inverse transform along x
     for j in range(N):
         # iDXT a[:,j] and set as f[:,j]
-        f[:, j] = dcst.dct(a[:, j])
+        f[:, j] = dcst.idct(a[:, j])
     return f
 
 # Integration methods
@@ -149,3 +149,7 @@ def gaussxw(N):
 def gaussxwab(N,a,b):
     x,w = gaussxw(N)
     return 0.5*(b-a)*x+0.5*(b+a),0.5*(b-a)*w
+
+
+    
+
