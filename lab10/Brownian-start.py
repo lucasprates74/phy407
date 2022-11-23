@@ -46,8 +46,6 @@ rc('font', **font)
 
 
 # %% main program starts here ------------------------------------------------|
-# YOU NEED TO FINISH IT!
-
 
 Lp = 101  # size of domain
 Nt = 50000  # number of time steps
@@ -59,7 +57,7 @@ centre_point = (Lp-1)//2  # middle point of domain
 xp = centre_point
 yp = centre_point
 
-# Position arrays
+# Position arrays initial conditions
 x_arr[0] = xp
 y_arr[0] = yp
 
@@ -68,6 +66,7 @@ for i in range(Nt-1):
     x_arr[i+1], y_arr[i+1] = nextmove(x_arr[i], y_arr[i])
 
 # Plotting
+# Time series plots
 t = np.arange(0, Nt, 1)
 fig, axs = plt.subplots(2, 1)
 axs[0].plot(t, x_arr/Lp)
@@ -82,6 +81,7 @@ plt.tight_layout()
 plt.savefig('Q1aTimeSeries.png', dpi=300, bbox_inches='tight')
 plt.clf()
 
+# Trajectory plot
 plt.plot(x_arr/Lp, y_arr/Lp)
 plt.grid()
 plt.xlabel('$x(t_i)/L$')

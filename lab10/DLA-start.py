@@ -40,6 +40,7 @@ anchored = np.zeros((Lp+1, Lp+1), dtype=int) # array to represent whether each g
 
 centre_point = (Lp-1)//2  # middle point of domain
 
+# DLA algorithm
 while anchored[centre_point, centre_point] != 1: # While there is no anchored particle at the center
     particle_position = (centre_point, centre_point)
     while 0 < particle_position[0] < Lp and 0 < particle_position[1] < Lp: # Check if particle is at the edges
