@@ -1,5 +1,5 @@
 """
-Q1 code. Solves the traveling salesman problem and minimizes some example functions using annealing optimization.
+Q1 code. Solves the traveling salesman problem and minimizes some example functions using annealing optimization with an exponential cooling schedule.
 Author: Sam De Abreu
 """
 # Imports
@@ -10,9 +10,10 @@ from scipy.optimize import curve_fit
 plt.rcParams.update({'font.size': 16}) # change plot font size
 
 # Constants
-N = 25 # Number of points (for traveling salesman) for Q1a
+N = 25 # Number of points (for traveling salesman) in Q1a
 
 # Q1a code
+
 def curve_fit_func(x, a, b):
     """
     Function used in curve fitting (tau, D) data
@@ -84,7 +85,6 @@ def var_D(n):
         plt.title('Path Solution {2} ($D_{{inital}}={0}$, $D_{{final}}={1}$)'.format(round(D_i, 2), round(D, 2), k+1))
         plt.savefig('Q1aSol{0}'.format(k), dpi=300, bbox_inches='tight')
         plt.clf()
-    print(D_list)
     print('Average D value is {0} with stdev of {1}'.format(round(np.average(D_list), 3), round(np.std(D_list), 3)))
 
 def var_tau():
@@ -93,14 +93,14 @@ def var_tau():
     """
     tau_list = []
     D_list = []
-    taus = [3e3, 5e3, 7e3, 9e3, 1e4, 2e4, 3e4, 4e4, 5e4, 6e4, 7e4, 8e4] # 1e4 + 0.3e3*(k-n//2)
+    taus = [3e3, 5e3, 7e3, 9e3, 1e4, 2e4, 3e4, 4e4, 5e4, 6e4, 7e4, 8e4]
     for k in range(len(taus)):
         tau = taus[k]
         tau_list.append(tau)
         D_i, D, r = anneal_Q1a(tau=tau, Tmin=1e-3, Tmax=10, loop_seed=k, pos_seed=3) # Compute new D and path for different loop_seed and tau
         D_list.append(D)
         print('D value is {0} with tau of {1}'.format(round(D, 3), round(tau, 3)))
-    popt, pcov = curve_fit(curve_fit_func, tau_list, D_list, (0, 0)) # Curve fit the (tau, D) to see if the general trend is increasing or decreasing
+    popt, _ = curve_fit(curve_fit_func, tau_list, D_list, (0, 0)) # Curve fit the (tau, D) to see if the general trend is increasing or decreasing
     # Plot the relationship
     plt.plot(tau_list, D_list, marker='o', label='Data')
     plt.plot(tau_list, curve_fit_func(np.array(tau_list), popt[0], popt[1]), linestyle='dashed', color='k', label='Linear Fit')
@@ -131,7 +131,7 @@ def gen_pos(x, y, lb):
     """
     Generates new position (x_d,y_d) using nonuniform Gaussian sampling based off of inputted pair (x,y). We also ensure the newly generated points lie within defined bounds: lb < x_d < 50, -20 < y_d < 20. Used in the Minimize() function
     """
-    # See section 10.1.6 for an explanation on the following code
+    # See section 10.1.6 in the textbook for an explanation on the following code
     r = np.sqrt(-2*np.log(1-random.random()))
     theta = random.random() * 2*np.pi
     delta_x, delta_y = r*np.cos(theta), r*np.sin(theta)
