@@ -53,7 +53,10 @@ for n in range(attempts):
     mvms[n] = mean_value_method()
     isms[n] = importance_sampling_method()
 
+# create histogram bins
 bins = np.linspace(0.8, 0.88, 11)
+
+#
 plt.figure(figsize=(10,4))
 
 plt.subplot(1,2,1)
